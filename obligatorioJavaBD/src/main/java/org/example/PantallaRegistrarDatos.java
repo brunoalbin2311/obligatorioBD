@@ -8,6 +8,8 @@ import java.awt.event.FocusListener;
 
 public class PantallaRegistrarDatos {
 
+    private JTextField campoCuenta;
+    private JTextField campoContra;
     private JTextField campoCedula;
     private JTextField campoNombre;
     private JTextField campoFechaNacimiento;
@@ -23,6 +25,8 @@ public class PantallaRegistrarDatos {
         JFrame frame = new JFrame("Formulario de Registro");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
+        campoCuenta = createTextFieldWithPlaceholder("ejemplo123", 20);
+        campoContra = createTextFieldWithPlaceholder("********", 20);
         campoCedula = createTextFieldWithPlaceholder("X.XXX.XXX-X", 20);
         campoNombre = createTextFieldWithPlaceholder("Nombres Apellidos", 20);
         campoFechaNacimiento = createTextFieldWithPlaceholder("AAAA-MM-DD", 10);
@@ -31,6 +35,8 @@ public class PantallaRegistrarDatos {
         campoTelefono = createTextFieldWithPlaceholder("Teléfono", 20);
         campoFechaVencimiento = createTextFieldWithPlaceholder("AAAA-MM-DD", 10);
 
+        JLabel etiquetaCuenta = new JLabel("Cuenta   ");
+        JLabel etiquetaContra = new JLabel("Contraseña   ");
         JLabel etiquetaCedula = new JLabel("Cédula   ");
         JLabel etiquetaNombre = new JLabel("Nombre   ");
         JLabel etiquetaFechaNacimiento = new JLabel("Fecha de Nacimiento   ");
@@ -60,6 +66,8 @@ public class PantallaRegistrarDatos {
         gbc.insets = new Insets(5, 5, 5, 5);
         gbc.anchor = GridBagConstraints.WEST;
 
+        addToPanel(panelFormulario, etiquetaCuenta, campoCuenta, gbc);
+        addToPanel(panelFormulario, etiquetaContra, campoContra, gbc);
         addToPanel(panelFormulario, etiquetaCedula, campoCedula, gbc);
         addToPanel(panelFormulario, etiquetaNombre, campoNombre, gbc);
         addToPanel(panelFormulario, etiquetaFechaNacimiento, campoFechaNacimiento, gbc);
@@ -134,6 +142,8 @@ public class PantallaRegistrarDatos {
     }
 
     private void enviarDatos() {
+        String cuenta = campoCuenta.getText();
+        String contra = campoContra.getText();
         String cedula = campoCedula.getText();
         String nombre = campoNombre.getText();
         String fechaNacimiento = campoFechaNacimiento.getText();
@@ -142,6 +152,8 @@ public class PantallaRegistrarDatos {
         String telefono = campoTelefono.getText();
         String fechaVencimiento = campoFechaVencimiento.getText();
 
+        System.out.println("Cuenta: " + cuenta);
+        System.out.println("Contraseña: " + contra);
         System.out.println("Cédula: " + cedula);
         System.out.println("Nombre: " + nombre);
         System.out.println("Fecha de Nacimiento: " + fechaNacimiento);

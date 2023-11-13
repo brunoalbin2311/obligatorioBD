@@ -7,6 +7,10 @@ import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import java.util.regex.Pattern;
 import java.util.regex.Matcher;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 
 public class PantallaCompletarDatos {
 
@@ -129,24 +133,51 @@ public class PantallaCompletarDatos {
     }
 
     private void enviarDatos() {
-        String cedula = campoCedula.getText();
-        String nombre = campoNombre.getText();
-        String fechaNacimiento = campoFechaNacimiento.getText();
-        String fechaVencimiento = campoFechaVencimiento.getText();
+        boolean datosCorrectos = false;
+        boolean errorEncontrado = false;
 
-        // Checker que los datos esten bien
-        if (validarCedula(cedula)) {
-            System.out.println("Cédula válida: " + cedula);
-        } else {
-            JOptionPane.showMessageDialog(null, "La cédula no tiene un formato válido (X.XXX.XXX-X)");
+        while (!datosCorrectos && !errorEncontrado) {
+            String cedula = campoCedula.getText();
+            String nombre = campoNombre.getText();
+            String fechaNacimiento = campoFechaNacimiento.getText();
+            String fechaVencimiento = campoFechaVencimiento.getText();
+
+            boolean cedulaValida = validarCedula(cedula);
+            boolean nombreValido = validarNombre(nombre);
+            boolean fechaNacimientoValida = validarFechaNacimiento(fechaNacimiento);
+            boolean fechaFormatoValida = validarFechaFormato(fechaVencimiento);
+            boolean fechaVencimientoValida = validarVencimientoFecha(fechaVencimiento);
+
+            if (cedulaValida && nombreValido && fechaNacimientoValida && fechaFormatoValida && fechaVencimientoValida) {
+                datosCorrectos = true;
+                System.out.println("Cedula: " + cedula);
+                System.out.println("Nombre: " + nombre);
+                System.out.println("Fecha Nacimiento: " + fechaNacimiento);
+                System.out.println("Fecha carnet: " + fechaVencimiento);
+            } else {
+                errorEncontrado = true;
+
+                if (!cedulaValida) {
+                    JOptionPane.showMessageDialog(null, "Su cédula no tiene un formato válido (X.XXX.XXX-X)");
+                    campoCedula.setText("X.XXX.XXX-X");
+                } else if (!nombreValido) {
+                    JOptionPane.showMessageDialog(null, "Ingrese correctamente su nombre");
+                    campoNombre.setText("Nombres Apellidos");
+                } else if (!fechaNacimientoValida) {
+                    JOptionPane.showMessageDialog(null, "Su fecha de nacimiento está mal o no tiene el formato válido (AAAA-MM-DD) o no existe");
+                    campoFechaNacimiento.setText("AAAA-MM-DD");
+                } else if (!fechaFormatoValida) {
+                    JOptionPane.showMessageDialog(null, "La fecha de vencimiento de su carnet no tiene un formato válido (AAAA-MM-DD) o no existe");
+                    campoFechaVencimiento.setText("AAAA-MM-DD");
+                } else if (!fechaVencimientoValida) {
+                    JOptionPane.showMessageDialog(null, "Su carnet está vencido, haga click aquí para renovar su carnet");
+                    campoFechaVencimiento.setText("AAAA-MM-DD");
+                }
+            }
         }
-        if (validarNombre(nombre)) {
-            System.out.println("Nombre válido: " + nombre);
-        } else {
-            JOptionPane.showMessageDialog(null, "Ingrese correctamente su nombre");
-        }
-        // Repetir con los otros
     }
+
+
 
     private boolean validarCedula(String cedula) {
         //Esto bien nose como funciona pero lo encontre por ahí, funciona q es lo importante, valida q sean números y tenga puntos y guion la cedula
@@ -165,6 +196,99 @@ public class PantallaCompletarDatos {
             }
         }
         return true;
+    }
+    private static boolean validarFechaNacimiento(String fecha) {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        sdf.setLenient(false); // Esto evita que se ajusten automáticamente los valores inválidos
+
+        try {
+            Date date = sdf.parse(fecha);
+            Date hoyDate = new Date();
+
+            if (date.after(hoyDate)) { //Fecha anterior a la de hoy
+                return false;
+            }
+
+            // Validar q la fecha tenga sentido y no se agrege por ejemplo dia 30 en el mes 2
+            Calendar cal = Calendar.getInstance();
+            cal.setTime(date);
+            int ano = cal.get(Calendar.YEAR);
+            int mes = cal.get(Calendar.MONTH) + 1; // El mes arranca en 0 nose xq
+            int dia = cal.get(Calendar.DAY_OF_MONTH);
+
+            if (ano < 0 || mes > 12 || mes < 1 || dia < 1 || dia > 31) {
+                return false;
+            }
+
+            //Febrero
+            if (mes == 2) {
+                boolean esBisiesto = (ano % 4 == 0 && ano % 100 != 0) || (ano % 400 == 0);
+                if (esBisiesto && dia > 29) {
+                    return false;
+                } else if (dia > 28) {
+                    return false;
+                }
+                //Meses con 31 dias
+            } else if ((mes == 4 || mes == 6 || mes == 9 || mes == 11) && dia > 30) {
+                return false;
+            }
+
+            return true;
+
+        } catch (ParseException e) {
+            return false;
+        }
+    }
+    private static boolean validarFechaFormato(String fecha) {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        sdf.setLenient(false);
+
+        try {
+            Date date = sdf.parse(fecha);
+            Date hoyDate = new Date();
+
+            // Validar q la fecha tenga sentido y no se agrege por ejemplo dia 30 en el mes 2
+            Calendar cal = Calendar.getInstance();
+            cal.setTime(date);
+            int ano = cal.get(Calendar.YEAR);
+            int mes = cal.get(Calendar.MONTH) + 1; // El mes arranca en 0 nose xq
+            int dia = cal.get(Calendar.DAY_OF_MONTH);
+
+            if (ano < 0 || mes > 12 || mes < 1 || dia < 1 || dia > 31) {
+                return false;
+            }
+
+            //Febrero
+            if (mes == 2) {
+                boolean esBisiesto = (ano % 4 == 0 && ano % 100 != 0) || (ano % 400 == 0);
+                if (esBisiesto && dia > 29) {
+                    return false;
+                } else if (dia > 28) {
+                    return false;
+                }
+                //Meses con 31 dias
+            } else if ((mes == 4 || mes == 6 || mes == 9 || mes == 11) && dia > 30) {
+                return false;
+            }
+
+            return true;
+
+        } catch (ParseException e) {
+            return false;
+        }
+    }
+    private static boolean validarVencimientoFecha(String fecha) {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        sdf.setLenient(false);
+
+        try {
+            Date date = sdf.parse(fecha);
+            Date currentDate = new Date();
+
+            return date.after(currentDate);
+        } catch (ParseException e) {
+            return false;
+        }
     }
 
     public static void main(String[] args) {
