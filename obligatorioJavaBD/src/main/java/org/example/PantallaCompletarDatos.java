@@ -218,7 +218,7 @@ public class PantallaCompletarDatos {
     }
     private static boolean validarFechaNacimiento(String fecha) {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-        sdf.setLenient(false); // Esto evita que se ajusten automáticamente los valores inválidos
+        sdf.setLenient(false);
 
         try {
             Date date = sdf.parse(fecha);

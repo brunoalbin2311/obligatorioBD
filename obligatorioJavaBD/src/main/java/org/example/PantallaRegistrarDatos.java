@@ -11,6 +11,10 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 
 public class PantallaRegistrarDatos {
 
@@ -151,6 +155,7 @@ public class PantallaRegistrarDatos {
         boolean datosCorrectos = false;
         boolean errorEncontrado = false;
 
+
         while (!datosCorrectos && !errorEncontrado) {
             String cuenta = campoCuenta.getText();
             String contra = campoContra.getText();
@@ -164,15 +169,45 @@ public class PantallaRegistrarDatos {
 
             if (validarCuenta(cuenta) && validarCuentaEspacios(cuenta) && validarContra(contra) && validarContraEspacios(contra) && validarCedula(cedula) && validarNombre(nombre) && validarFechaNacimiento(fechaNacimiento) && validarDomicilio(domicilio) && validarCorreo(correo) && validarTelefono(telefono) && validarFechaFormato(fechaVencimiento) && validarVencimientoFecha(fechaVencimiento)) {
                 datosCorrectos = true;
-                System.out.println("Cuenta: " + cuenta);
-                System.out.println("Contra: " + contra);
-                System.out.println("Cedula: " + cedula);
-                System.out.println("Nombre: " + nombre);
-                System.out.println("Fecha Nacimiento: " + fechaNacimiento);
-                System.out.println("Domicilio: " + domicilio);
-                System.out.println("Correo: " + correo);
-                System.out.println("Telefono: " + telefono);
-                System.out.println("Fecha carnet: " + fechaVencimiento);
+
+                try {
+
+                    try {
+                        Class.forName("com.mysql.cj.jdbc.Driver");
+                    } catch (ClassNotFoundException e) {
+                        e.printStackTrace();
+                    }
+
+                    Connection conexion = DriverManager.getConnection("jdbc:mysql://localhost:3306/obligatorioBD", "root", "bernardo");
+
+                    String sqlLogin = "INSERT INTO Login (LogId, Contra) VALUES (?, ?)";
+                    try (PreparedStatement pstmtLogin = conexion.prepareStatement(sqlLogin)) {
+                        pstmtLogin.setString(1, cuenta);
+                        pstmtLogin.setString(2, contra);
+                        pstmtLogin.executeUpdate();
+                    }
+
+                    // Insertar datos en la tabla Funcionario
+                    String sqlFuncionario = "INSERT INTO Funcionario (Ci, Nombre, Fch_Nacimiento, Dirección, Teléfono, Email, LogId) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+                    try (PreparedStatement pstmtFuncionario = conexion.prepareStatement(sqlFuncionario)) {
+                        pstmtFuncionario.setString(1, cedula);
+                        pstmtFuncionario.setString(2, nombre);
+                        pstmtFuncionario.setString(4, fechaNacimiento);
+                        pstmtFuncionario.setString(5, domicilio);
+                        pstmtFuncionario.setString(6, telefono);
+                        pstmtFuncionario.setString(7, correo);
+                        pstmtFuncionario.setString(8, cuenta); // Asociar el Funcionario con el Login
+                        pstmtFuncionario.executeUpdate();
+
+                    }
+                    conexion.close();
+
+                    System.out.println("Datos insertados correctamente.");
+
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+
             } else {
 
                 errorEncontrado = true;
@@ -292,7 +327,7 @@ public class PantallaRegistrarDatos {
     }
     private static boolean validarFechaNacimiento(String fecha) {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-        sdf.setLenient(false); // Esto evita que se ajusten automáticamente los valores inválidos
+        sdf.setLenient(false);
 
         try {
             Date date = sdf.parse(fecha);
@@ -334,7 +369,7 @@ public class PantallaRegistrarDatos {
     }
     private boolean validarDomicilio(String domicilio) {
         //Que sean solo letras xq los nombres no pueden tener otras cosas
-        String noContener = "1234567890!@#$%^&*()_+-=[]{};:,.<>?/|~`\\\"'";
+        String noContener = "!@#$%^&*()_+-=[]{};:,.<>?/|~`\\\"'";
         for (int i = 0; i < domicilio.length(); i++) {
             char a = domicilio.charAt(i);
             if (noContener.contains(String.valueOf(a))) {
