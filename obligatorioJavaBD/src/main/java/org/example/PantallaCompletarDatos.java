@@ -142,13 +142,7 @@ public class PantallaCompletarDatos {
             String fechaNacimiento = campoFechaNacimiento.getText();
             String fechaVencimiento = campoFechaVencimiento.getText();
 
-            boolean cedulaValida = validarCedula(cedula);
-            boolean nombreValido = validarNombre(nombre);
-            boolean fechaNacimientoValida = validarFechaNacimiento(fechaNacimiento);
-            boolean fechaFormatoValida = validarFechaFormato(fechaVencimiento);
-            boolean fechaVencimientoValida = validarVencimientoFecha(fechaVencimiento);
-
-            if (cedulaValida && nombreValido && fechaNacimientoValida && fechaFormatoValida && fechaVencimientoValida) {
+            if (validarCedula(cedula) && validarNombre(nombre) && validarFechaNacimiento(fechaNacimiento) && validarFechaFormato(fechaVencimiento) && validarVencimientoFecha(fechaVencimiento)) {
                 datosCorrectos = true;
                 System.out.println("Cedula: " + cedula);
                 System.out.println("Nombre: " + nombre);
@@ -157,27 +151,52 @@ public class PantallaCompletarDatos {
             } else {
                 errorEncontrado = true;
 
-                if (!cedulaValida) {
+                if (!validarCedula(cedula)) {
                     JOptionPane.showMessageDialog(null, "Su cédula no tiene un formato válido (X.XXX.XXX-X)");
-                    campoCedula.setText("X.XXX.XXX-X");
-                } else if (!nombreValido) {
+                    campoCedula.setText(cedula);
+                } else if (!validarNombre(nombre)) {
                     JOptionPane.showMessageDialog(null, "Ingrese correctamente su nombre");
-                    campoNombre.setText("Nombres Apellidos");
-                } else if (!fechaNacimientoValida) {
-                    JOptionPane.showMessageDialog(null, "Su fecha de nacimiento está mal o no tiene el formato válido (AAAA-MM-DD) o no existe");
-                    campoFechaNacimiento.setText("AAAA-MM-DD");
-                } else if (!fechaFormatoValida) {
+                    campoNombre.setText(nombre);
+                } else if (!validarFechaNacimiento(fechaNacimiento)) {
+                    JOptionPane.showMessageDialog(null, "Su fecha de nacimiento está mal o no tiene el formato válido (AAAA-MM-DD)");
+                    campoFechaNacimiento.setText(fechaNacimiento);
+                } else if (!validarFechaFormato(fechaVencimiento)) {
                     JOptionPane.showMessageDialog(null, "La fecha de vencimiento de su carnet no tiene un formato válido (AAAA-MM-DD) o no existe");
-                    campoFechaVencimiento.setText("AAAA-MM-DD");
-                } else if (!fechaVencimientoValida) {
+                    campoFechaVencimiento.setText(fechaVencimiento);
+                } else if (!validarVencimientoFecha(fechaVencimiento)) {
                     JOptionPane.showMessageDialog(null, "Su carnet está vencido, haga click aquí para renovar su carnet");
-                    campoFechaVencimiento.setText("AAAA-MM-DD");
+                    campoFechaVencimiento.setText(fechaVencimiento);
                 }
             }
         }
+        if(!errorEncontrado){
+            JDialog dialog = new JDialog();
+            dialog.setLayout(new BorderLayout());
+
+            JPanel contentPanel = new JPanel(new GridLayout(2, 1)); // Panel para organizar el contenido
+            contentPanel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
+
+            JLabel label = new JLabel("Se han actualizado sus datos con éxito!");
+            label.setHorizontalAlignment(SwingConstants.CENTER); // Centrar el mensaje
+            contentPanel.add(label);
+
+            JPanel buttonPanel = new JPanel(new FlowLayout()); // Panel para el botón
+            JButton okButton = new JButton("Ok");
+            okButton.addActionListener(e -> {
+                dialog.setVisible(false);
+                dialog.dispose();
+                System.exit(0); // Esto cierra la aplicación
+            });
+            buttonPanel.add(okButton);
+
+            contentPanel.add(buttonPanel);
+            dialog.add(contentPanel, BorderLayout.CENTER);
+
+            dialog.pack();
+            dialog.setLocationRelativeTo(null);
+            dialog.setVisible(true);
+        }
     }
-
-
 
     private boolean validarCedula(String cedula) {
         //Esto bien nose como funciona pero lo encontre por ahí, funciona q es lo importante, valida q sean números y tenga puntos y guion la cedula
