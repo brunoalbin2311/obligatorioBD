@@ -8,7 +8,10 @@ package com.mycompany.obligatoriobd2;
  *
  * @author albin
  */
-public class Main {
+public class ObligatorioBD2 {
 
-    public 
+    public static void main(String[] args) {
+        PantallaRegistrarDatos pantallaRegistrarDatos = new PantallaRegistrarDatos();
+        pantallaRegistrarDatos.setVisible(true);
+    }
 }

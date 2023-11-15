@@ -196,13 +196,11 @@ public class PantallaRegistrarDatos {
                         pstmtFuncionario.setString(5, domicilio);
                         pstmtFuncionario.setString(6, telefono);
                         pstmtFuncionario.setString(7, correo);
-                        pstmtFuncionario.setString(8, cuenta); // Asociar el Funcionario con el Login
+                        pstmtFuncionario.setString(8, cuenta);
                         pstmtFuncionario.executeUpdate();
 
                     }
                     conexion.close();
-
-                    System.out.println("Datos insertados correctamente.");
 
                 } catch (SQLException e) {
                     e.printStackTrace();

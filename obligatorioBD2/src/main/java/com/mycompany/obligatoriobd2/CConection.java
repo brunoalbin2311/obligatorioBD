@@ -4,10 +4,35 @@
  */
 package com.mycompany.obligatoriobd2;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author albin
  */
 public class CConection {
     
+    Connection conectar = null;
+    
+    String usuario = "root";
+    String contra = "bernardo";
+    String bd = "obligatorioBD";
+    String ip = "localhost";
+    String puerto = "3306";
+    
+    String cadena = "jdbc:mysql://"+ip+":"+puerto+"/"+bd;
+    
+    public Connection establecerConexion(){
+        
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            conectar = DriverManager.getConnection(cadena,usuario,contra);
+            
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error al conectarse con la base de datos, error: "+e.toString());
+        }
+        return conectar;
+    }
 }

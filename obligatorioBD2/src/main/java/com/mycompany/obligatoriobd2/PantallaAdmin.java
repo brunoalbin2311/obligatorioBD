@@ -26,21 +26,98 @@ public class PantallaAdmin extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLabelFechaFin = new javax.swing.JLabel();
+        botonActualizarAdmin = new javax.swing.JButton();
+        jLabelFechaInicio = new javax.swing.JLabel();
+        jLabelTituloAdmin = new javax.swing.JLabel();
+        jTextFieldFechaInicio = new javax.swing.JTextField();
+        jTextFieldFechaFin = new javax.swing.JTextField();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jLabelFechaFin.setText("Fecha fin");
+
+        botonActualizarAdmin.setText("Actualizar");
+        botonActualizarAdmin.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonActualizarAdminActionPerformed(evt);
+            }
+        });
+
+        jLabelFechaInicio.setText("Fecha inicio");
+
+        jLabelTituloAdmin.setFont(new java.awt.Font("Arial Black", 0, 16)); // NOI18N
+        jLabelTituloAdmin.setText("Modificación fecha período de actualización de datos");
+
+        jTextFieldFechaInicio.setText("2023-11-1");
+        jTextFieldFechaInicio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextFieldFechaInicioActionPerformed(evt);
+            }
+        });
+
+        jTextFieldFechaFin.setText("2023-11-15");
+        jTextFieldFechaFin.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextFieldFechaFinActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 274, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(24, 24, 24)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabelTituloAdmin)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabelFechaInicio)
+                                    .addComponent(jLabelFechaFin))
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jTextFieldFechaInicio)
+                                    .addComponent(jTextFieldFechaFin, javax.swing.GroupLayout.DEFAULT_SIZE, 116, Short.MAX_VALUE)))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(210, 210, 210)
+                        .addComponent(botonActualizarAdmin, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(20, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 198, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(22, 22, 22)
+                .addComponent(jLabelTituloAdmin)
+                .addGap(31, 31, 31)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabelFechaInicio)
+                    .addComponent(jTextFieldFechaInicio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(12, 12, 12)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabelFechaFin)
+                    .addComponent(jTextFieldFechaFin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 23, Short.MAX_VALUE)
+                .addComponent(botonActualizarAdmin)
+                .addGap(17, 17, 17))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void botonActualizarAdminActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonActualizarAdminActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_botonActualizarAdminActionPerformed
+
+    private void jTextFieldFechaInicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldFechaInicioActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextFieldFechaInicioActionPerformed
+
+    private void jTextFieldFechaFinActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldFechaFinActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextFieldFechaFinActionPerformed
 
     /**
      * @param args the command line arguments
@@ -78,5 +155,11 @@ public class PantallaAdmin extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton botonActualizarAdmin;
+    private javax.swing.JLabel jLabelFechaFin;
+    private javax.swing.JLabel jLabelFechaInicio;
+    private javax.swing.JLabel jLabelTituloAdmin;
+    private javax.swing.JTextField jTextFieldFechaFin;
+    private javax.swing.JTextField jTextFieldFechaInicio;
     // End of variables declaration//GEN-END:variables
 }
