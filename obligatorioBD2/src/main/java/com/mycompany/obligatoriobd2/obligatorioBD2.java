@@ -11,7 +11,8 @@ package com.mycompany.obligatoriobd2;
 public class ObligatorioBD2 {
 
     public static void main(String[] args) {
-        PantallaRegistrarDatos pantallaRegistrarDatos = new PantallaRegistrarDatos();
-        pantallaRegistrarDatos.setVisible(true);
+        PantallaIniciar pantalla = new PantallaIniciar();
+        pantalla.setVisible(true);
+        pantalla.setLocationRelativeTo(null);
     }
 }
