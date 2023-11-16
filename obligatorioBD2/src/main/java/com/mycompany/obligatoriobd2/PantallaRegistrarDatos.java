@@ -4,6 +4,8 @@
  */
 package com.mycompany.obligatoriobd2;
 
+import java.awt.Color;
+
 /**
  *
  * @author albin
@@ -73,56 +75,48 @@ public class PantallaRegistrarDatos extends javax.swing.JFrame {
 
         jLabelFechaCarnet.setText("Fecha vencimiento carnet");
 
-        jTextFieldCedula.setText("5.631.554-4");
         jTextFieldCedula.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextFieldCedulaActionPerformed(evt);
             }
         });
 
-        jTextFieldNombre.setText("Bruno");
         jTextFieldNombre.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextFieldNombreActionPerformed(evt);
             }
         });
 
-        jTextFieldCuenta.setText("bruno123");
         jTextFieldCuenta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextFieldCuentaActionPerformed(evt);
             }
         });
 
-        jTextFieldApellido.setText("Albín");
         jTextFieldApellido.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextFieldApellidoActionPerformed(evt);
             }
         });
 
-        jTextFieldFechaNacimiento.setText("2023-11-23");
         jTextFieldFechaNacimiento.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextFieldFechaNacimientoActionPerformed(evt);
             }
         });
 
-        jTextFieldDireccion.setText("Artigas 1163");
         jTextFieldDireccion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextFieldDireccionActionPerformed(evt);
             }
         });
 
-        jTextFieldCorreo.setText("albinbruno0020@gmail.com");
         jTextFieldCorreo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextFieldCorreoActionPerformed(evt);
             }
         });
 
-        jTextFieldFechaVencimiento.setText("2001-10-10");
         jTextFieldFechaVencimiento.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextFieldFechaVencimientoActionPerformed(evt);
@@ -134,6 +128,20 @@ public class PantallaRegistrarDatos extends javax.swing.JFrame {
         jLabelNoCarnet.setFont(new java.awt.Font("Eras Bold ITC", 0, 14)); // NOI18N
         jLabelNoCarnet.setText("No tengo carnet / No tengo carnet vigente");
         jLabelNoCarnet.setToolTipText("");
+        jLabelNoCarnet.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabelNoCarnetMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jLabelNoCarnetMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jLabelNoCarnetMouseExited(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                jLabelNoCarnetMouseReleased(evt);
+            }
+        });
 
         botonCompletarDatos.setText("Enviar");
         botonCompletarDatos.addActionListener(new java.awt.event.ActionListener() {
@@ -142,14 +150,12 @@ public class PantallaRegistrarDatos extends javax.swing.JFrame {
             }
         });
 
-        jTextFieldContra.setText("holahola12");
         jTextFieldContra.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextFieldContraActionPerformed(evt);
             }
         });
 
-        jTextFieldTelefono1.setText("091697659");
         jTextFieldTelefono1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextFieldTelefono1ActionPerformed(evt);
@@ -304,7 +310,7 @@ public class PantallaRegistrarDatos extends javax.swing.JFrame {
 
     private void botonCompletarDatosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonCompletarDatosActionPerformed
         Funcionario funcionario = new Funcionario();
-        funcionario.insertarFuncionario(jTextFieldCuenta, jTextFieldContra, jTextFieldCedula, jTextFieldNombre, jTextFieldApellido, jTextFieldFechaNacimiento, jTextFieldDireccion, jTextFieldCorreo, jTextFieldTelefono1, jTextFieldFechaVencimiento);
+        funcionario.insertarFuncionario(jTextFieldCuenta, jTextFieldContra, jTextFieldCedula, jTextFieldNombre, jTextFieldApellido, jTextFieldFechaNacimiento, jTextFieldDireccion, jTextFieldCorreo, jTextFieldTelefono1);
     }//GEN-LAST:event_botonCompletarDatosActionPerformed
 
     private void jTextFieldContraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldContraActionPerformed
@@ -314,6 +320,26 @@ public class PantallaRegistrarDatos extends javax.swing.JFrame {
     private void jTextFieldTelefono1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldTelefono1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextFieldTelefono1ActionPerformed
+
+    private void jLabelNoCarnetMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelNoCarnetMouseClicked
+        
+        dispose();
+        PantallaAgenda pantallaAgenda = new PantallaAgenda();
+        pantallaAgenda.setLocationRelativeTo(null); 
+        pantallaAgenda.setVisible(true);
+    }//GEN-LAST:event_jLabelNoCarnetMouseClicked
+
+    private void jLabelNoCarnetMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelNoCarnetMouseEntered
+        jLabelNoCarnet.setForeground(Color.BLUE);
+    }//GEN-LAST:event_jLabelNoCarnetMouseEntered
+
+    private void jLabelNoCarnetMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelNoCarnetMouseReleased
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jLabelNoCarnetMouseReleased
+
+    private void jLabelNoCarnetMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelNoCarnetMouseExited
+        jLabelNoCarnet.setForeground(Color.BLACK);
+    }//GEN-LAST:event_jLabelNoCarnetMouseExited
 
     /**
      * @param args the command line arguments

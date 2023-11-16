@@ -26,8 +26,6 @@ public class Funcionario {
     String Direccion;
     String Correo;
     String Telefono;
-    String CarnetDeSalud;
-    String FechaVencimiento;
     
     public String getCuenta() {
         return cuenta;
@@ -100,24 +98,8 @@ public class Funcionario {
     public void setTelefono(String Telefono) {
         this.Telefono = Telefono;
     }
-
-    public String getCarnetDeSalud() {
-        return CarnetDeSalud;
-    }
-
-    public void setCarnetDeSalud(String CarnetDeSalud) {
-        this.CarnetDeSalud = CarnetDeSalud;
-    }
-
-    public String getFechaVencimiento() {
-        return FechaVencimiento;
-    }
-
-    public void setFechaVencimiento(String FechaVencimiento) {
-        this.FechaVencimiento = FechaVencimiento;
-    }
     
-    public void insertarFuncionario(JTextField cuenta, JTextField contra, JTextField cedula, JTextField nombre, JTextField apellido, JTextField fechaNacimiento, JTextField direccion, JTextField correo, JTextField telefono, JTextField fechaVencimiento){
+    public void insertarFuncionario(JTextField cuenta, JTextField contra, JTextField cedula, JTextField nombre, JTextField apellido, JTextField fechaNacimiento, JTextField direccion, JTextField correo, JTextField telefono){
         
         setCuenta(cuenta.getText());
         setContra(contra.getText());
@@ -128,7 +110,6 @@ public class Funcionario {
         setDireccion(direccion.getText());
         setCorreo(correo.getText());
         setTelefono(telefono.getText());
-        setFechaVencimiento(fechaVencimiento.getText());
         
         CConection coneccion = new CConection();
         

@@ -210,65 +210,41 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="jTextFieldCedula">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="5.631.554-4"/>
-      </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTextFieldCedulaActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="jTextFieldNombre">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Bruno"/>
-      </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTextFieldNombreActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="jTextFieldCuenta">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="bruno123"/>
-      </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTextFieldCuentaActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="jTextFieldApellido">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Alb&#xed;n"/>
-      </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTextFieldApellidoActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="jTextFieldFechaNacimiento">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="2023-11-23"/>
-      </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTextFieldFechaNacimientoActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="jTextFieldDireccion">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Artigas 1163"/>
-      </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTextFieldDireccionActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="jTextFieldCorreo">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="albinbruno0020@gmail.com"/>
-      </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTextFieldCorreoActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="jTextFieldFechaVencimiento">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="2001-10-10"/>
-      </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTextFieldFechaVencimientoActionPerformed"/>
       </Events>
@@ -286,6 +262,12 @@
         <Property name="text" type="java.lang.String" value="No tengo carnet / No tengo carnet vigente"/>
         <Property name="toolTipText" type="java.lang.String" value=""/>
       </Properties>
+      <Events>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jLabelNoCarnetMouseClicked"/>
+        <EventHandler event="mouseEntered" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jLabelNoCarnetMouseEntered"/>
+        <EventHandler event="mouseExited" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jLabelNoCarnetMouseExited"/>
+        <EventHandler event="mouseReleased" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jLabelNoCarnetMouseReleased"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="botonCompletarDatos">
       <Properties>
@@ -296,17 +278,11 @@
       </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="jTextFieldContra">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="holahola12"/>
-      </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTextFieldContraActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="jTextFieldTelefono1">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="091697659"/>
-      </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTextFieldTelefono1ActionPerformed"/>
       </Events>

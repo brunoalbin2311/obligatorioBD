@@ -4,6 +4,9 @@
  */
 package com.mycompany.obligatoriobd2;
 
+import java.text.ParseException;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author albin
@@ -26,21 +29,96 @@ public class PantallaAgenda extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLabelTituloAgenda1 = new javax.swing.JLabel();
+        jTextFieldCedula = new javax.swing.JTextField();
+        jButtonAgendarme = new javax.swing.JButton();
+        jLabelCedula = new javax.swing.JLabel();
+        jLabelTituloAgenda = new javax.swing.JLabel();
+        jLabelTituloAgenda2 = new javax.swing.JLabel();
+
+        jLabelTituloAgenda1.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        jLabelTituloAgenda1.setText("Ingrese su cedula y automaticamente quedará");
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jTextFieldCedula.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextFieldCedulaActionPerformed(evt);
+            }
+        });
+
+        jButtonAgendarme.setText("Agendarme");
+        jButtonAgendarme.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonAgendarmeActionPerformed(evt);
+            }
+        });
+
+        jLabelCedula.setText("CI");
+
+        jLabelTituloAgenda.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        jLabelTituloAgenda.setText("Ingrese su cédula y automaticamente quedará");
+
+        jLabelTituloAgenda2.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        jLabelTituloAgenda2.setText("agendado para realizar su carnet en la clínica UCU");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(31, 31, 31)
+                        .addComponent(jLabelCedula)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jTextFieldCedula, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabelTituloAgenda))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabelTituloAgenda2))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(159, 159, 159)
+                        .addComponent(jButtonAgendarme, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(19, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabelTituloAgenda)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabelTituloAgenda2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTextFieldCedula, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabelCedula))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jButtonAgendarme)
+                .addGap(19, 19, 19))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButtonAgendarmeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAgendarmeActionPerformed
+        try {
+        String cedula = jTextFieldCedula.getText();
+        Agenda agenda = new Agenda();
+        agenda.insertarAgenda(cedula);
+
+        dispose();
+    } catch (ParseException | NumberFormatException e) {
+        // Manejar la excepción si ocurre un error al convertir la cédula o al insertar en la agenda
+        JOptionPane.showMessageDialog(null, "Error al procesar la cédula: " + e.toString());
+    }
+    }//GEN-LAST:event_jButtonAgendarmeActionPerformed
+
+    private void jTextFieldCedulaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldCedulaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextFieldCedulaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -78,5 +156,11 @@ public class PantallaAgenda extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButtonAgendarme;
+    private javax.swing.JLabel jLabelCedula;
+    private javax.swing.JLabel jLabelTituloAgenda;
+    private javax.swing.JLabel jLabelTituloAgenda1;
+    private javax.swing.JLabel jLabelTituloAgenda2;
+    private javax.swing.JTextField jTextFieldCedula;
     // End of variables declaration//GEN-END:variables
 }
