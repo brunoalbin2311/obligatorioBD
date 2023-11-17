@@ -43,26 +43,20 @@
           <Group type="102" attributes="0">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
-                      <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" alignment="1" attributes="0">
-                              <Component id="jLabelCuenta" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
-                          </Group>
-                          <Group type="102" alignment="0" attributes="0">
-                              <Component id="jLabelContra" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="9" max="-2" attributes="0"/>
-                          </Group>
+                          <Component id="jLabelContra" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLabelCuenta" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="jPasswordFieldContra" pref="270" max="32767" attributes="0"/>
-                          <Component id="jTextFieldCuenta" max="32767" attributes="0"/>
+                          <Component id="jTextFieldCuenta" pref="270" max="32767" attributes="0"/>
+                          <Component id="jTextFieldContra" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="170" max="-2" attributes="0"/>
-                      <Component id="botonIniciar" min="-2" pref="60" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="152" max="-2" attributes="0"/>
+                      <Component id="botonIniciar" min="-2" pref="93" max="-2" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace pref="26" max="32767" attributes="0"/>
@@ -77,14 +71,14 @@
                   <Component id="jLabelCuenta" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jTextFieldCuenta" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace max="-2" attributes="0"/>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="jTextFieldContra" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jLabelContra" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jPasswordFieldContra" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Component id="botonIniciar" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="13" max="32767" attributes="0"/>
+              <EmptySpace pref="16" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -101,14 +95,6 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="jTextFieldCuenta">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="ejemplo123"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JPasswordField" name="jPasswordFieldContra">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="jPasswordField1"/>
-      </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="botonIniciar">
       <Properties>
@@ -116,6 +102,11 @@
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="botonIniciarActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JTextField" name="jTextFieldContra">
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTextFieldContraActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>

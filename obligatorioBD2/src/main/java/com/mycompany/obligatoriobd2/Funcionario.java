@@ -9,6 +9,9 @@ import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JPasswordField;
 import java.sql.CallableStatement;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 /**
@@ -114,7 +117,7 @@ public class Funcionario {
         CConection coneccion = new CConection();
         
         String consulta1 = "INSERT INTO Login(LogId, Contra) VALUES (?,?);";
-        String consulta2 = "INSERT INTO Funcionario(Ci, Nombre, Apellido, Fch_Nacimiento, Dirección, Teléfono, Email, LogId) VALUES (?,?,?,?,?,?,?,?);";
+        String consulta2 = "INSERT INTO Funcionario(Ci, Nombre, Apellido, Fch_Nacimiento, Dirección, Telefono, Email, LogId) VALUES (?,?,?,?,?,?,?,?);";
         
         try {
             
@@ -143,5 +146,34 @@ public class Funcionario {
         } catch (HeadlessException | SQLException e ){
             JOptionPane.showMessageDialog(null, "Su registro no se hizo correctamente, error: "+e.toString());
         }
+    }
+    
+    public boolean verificarUsuario(JTextField cuenta, JTextField contra) {
+        
+        setCuenta(cuenta.getText());
+        setContra(contra.getText());
+        
+        boolean usuarioEncontrado = false;
+
+        try {
+            CConection conexion = new CConection();
+            Connection connection = conexion.establecerConexion();
+
+            String consulta = "SELECT * FROM Login WHERE LogId = ? AND Contra = ?";
+            PreparedStatement ps = connection.prepareStatement(consulta);
+            ps.setString(1, getCuenta());
+            ps.setString(2, getContra());
+
+            ResultSet rs = ps.executeQuery();
+
+            usuarioEncontrado = rs.next();
+
+            rs.close();
+            ps.close();
+            connection.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return usuarioEncontrado;
     }
 }

@@ -4,6 +4,10 @@
  */
 package com.mycompany.obligatoriobd2;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author albin
@@ -26,15 +30,15 @@ public class PantallaIniciar extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        JLabelTituloInicio = new javax.swing.JLabel();
+        JLabelTitulo = new javax.swing.JLabel();
         botonAdministrar = new javax.swing.JButton();
         botonRegistrar = new javax.swing.JButton();
         botonIniciarSesion = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        JLabelTituloInicio.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
-        JLabelTituloInicio.setText("Formulario actualización de datos");
+        JLabelTitulo.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        JLabelTitulo.setText("Formulario actualización de datos");
 
         botonAdministrar.setText("Administración");
         botonAdministrar.addActionListener(new java.awt.event.ActionListener() {
@@ -65,7 +69,7 @@ public class PantallaIniciar extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(JLabelTituloInicio)
+                        .addComponent(JLabelTitulo)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(0, 47, Short.MAX_VALUE)
@@ -80,7 +84,7 @@ public class PantallaIniciar extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(JLabelTituloInicio)
+                .addComponent(JLabelTitulo)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(botonAdministrar)
@@ -94,10 +98,21 @@ public class PantallaIniciar extends javax.swing.JFrame {
 
     private void botonRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonRegistrarActionPerformed
         
-        PantallaRegistrarDatos pantalla = new PantallaRegistrarDatos();
-        pantalla.setVisible(true);
-        pantalla.setLocationRelativeTo(null);
-        this.dispose();
+        Administracion admin = new Administracion();
+        
+        LocalDate fechaActual = LocalDate.now();
+        DateTimeFormatter formato = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        String fechaHoy = fechaActual.format(formato);
+        
+        if (admin.fechaEstaEnRango(fechaHoy)) {
+            PantallaRegistrarDatos pantalla = new PantallaRegistrarDatos();
+            pantalla.setVisible(true);
+            pantalla.setLocationRelativeTo(null);
+            this.dispose();
+        } else {
+            this.dispose();
+            JOptionPane.showMessageDialog(null, "Periodo no disponible, porfavor comunicarse con soporte");
+            }   
     }//GEN-LAST:event_botonRegistrarActionPerformed
 
     private void botonAdministrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonAdministrarActionPerformed
@@ -110,10 +125,21 @@ public class PantallaIniciar extends javax.swing.JFrame {
 
     private void botonIniciarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonIniciarSesionActionPerformed
         
-        PantallaLogin pantalla = new PantallaLogin();
-        pantalla.setVisible(true);
-        pantalla.setLocationRelativeTo(null);
-        this.dispose();
+        Administracion admin = new Administracion();
+        
+        LocalDate fechaActual = LocalDate.now();
+        DateTimeFormatter formato = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        String fechaHoy = fechaActual.format(formato);
+        
+        if (admin.fechaEstaEnRango(fechaHoy)) {
+            PantallaLogin pantalla = new PantallaLogin();
+            pantalla.setVisible(true);
+            pantalla.setLocationRelativeTo(null);
+            this.dispose();
+        } else {
+            this.dispose();
+            JOptionPane.showMessageDialog(null, "Periodo no disponible, porfavor comunicarse con soporte");
+            }   
     }//GEN-LAST:event_botonIniciarSesionActionPerformed
 
     /**
@@ -144,16 +170,13 @@ public class PantallaIniciar extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new PantallaIniciar().setVisible(true);
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            new PantallaIniciar().setVisible(true);
         });
     }
-    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel JLabelTituloInicio;
+    private javax.swing.JLabel JLabelTitulo;
     private javax.swing.JButton botonAdministrar;
     private javax.swing.JButton botonIniciarSesion;
     private javax.swing.JButton botonRegistrar;

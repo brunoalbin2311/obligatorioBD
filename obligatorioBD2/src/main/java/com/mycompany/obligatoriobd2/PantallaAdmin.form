@@ -101,17 +101,11 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="jTextFieldFechaInicio">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="2023-11-1"/>
-      </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTextFieldFechaInicioActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="jTextFieldFechaFin">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="2023-11-15"/>
-      </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTextFieldFechaFinActionPerformed"/>
       </Events>

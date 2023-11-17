@@ -169,10 +169,6 @@ public class PantallaRegistrarDatos extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(168, 168, 168)
-                .addComponent(botonCompletarDatos, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
                 .addGap(30, 30, 30)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -183,8 +179,8 @@ public class PantallaRegistrarDatos extends javax.swing.JFrame {
                                 .addComponent(jTextFieldFechaVencimiento, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabelCarnet)
-                                .addGap(59, 59, 59)
-                                .addComponent(jButtonCarnet)))
+                                .addGap(29, 29, 29)
+                                .addComponent(jButtonCarnet, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addContainerGap(23, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabelNoCarnet)
@@ -218,6 +214,10 @@ public class PantallaRegistrarDatos extends javax.swing.JFrame {
                                         .addComponent(jTextFieldCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addComponent(jTextFieldContra, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addGap(22, 22, 22))))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(botonCompletarDatos, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(165, 165, 165))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -311,6 +311,7 @@ public class PantallaRegistrarDatos extends javax.swing.JFrame {
     private void botonCompletarDatosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonCompletarDatosActionPerformed
         Funcionario funcionario = new Funcionario();
         funcionario.insertarFuncionario(jTextFieldCuenta, jTextFieldContra, jTextFieldCedula, jTextFieldNombre, jTextFieldApellido, jTextFieldFechaNacimiento, jTextFieldDireccion, jTextFieldCorreo, jTextFieldTelefono1);
+        dispose();
     }//GEN-LAST:event_botonCompletarDatosActionPerformed
 
     private void jTextFieldContraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldContraActionPerformed
@@ -322,7 +323,6 @@ public class PantallaRegistrarDatos extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextFieldTelefono1ActionPerformed
 
     private void jLabelNoCarnetMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelNoCarnetMouseClicked
-        
         dispose();
         PantallaAgenda pantallaAgenda = new PantallaAgenda();
         pantallaAgenda.setLocationRelativeTo(null); 

@@ -83,7 +83,7 @@
 
                 cs2.execute();
 
-                JOptionPane.showMessageDialog(null, "Usted quedo registrado con exito para la fecha: " + nuevaFecha);
+                JOptionPane.showMessageDialog(null, "Usted quedó agendado para la fecha: " + nuevaFecha);
 
             } catch (HeadlessException | SQLException e) {
                 JOptionPane.showMessageDialog(null, "Error al registrar la agenda: " + e.toString());

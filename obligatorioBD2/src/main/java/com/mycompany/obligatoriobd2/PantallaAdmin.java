@@ -4,6 +4,8 @@
  */
 package com.mycompany.obligatoriobd2;
 
+import java.time.LocalDate;
+
 /**
  *
  * @author albin
@@ -49,14 +51,12 @@ public class PantallaAdmin extends javax.swing.JFrame {
         jLabelTituloAdmin.setFont(new java.awt.Font("Arial Black", 0, 16)); // NOI18N
         jLabelTituloAdmin.setText("Modificación fecha período de actualización de datos");
 
-        jTextFieldFechaInicio.setText("2023-11-1");
         jTextFieldFechaInicio.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextFieldFechaInicioActionPerformed(evt);
             }
         });
 
-        jTextFieldFechaFin.setText("2023-11-15");
         jTextFieldFechaFin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextFieldFechaFinActionPerformed(evt);
@@ -108,7 +108,13 @@ public class PantallaAdmin extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void botonActualizarAdminActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonActualizarAdminActionPerformed
-        // TODO add your handling code here:
+        Administracion admin = new Administracion();
+        
+        admin.setFechaInicio(jLabelFechaInicio.getText());
+        admin.setFechaFin(jLabelFechaFin.getText());
+        
+        admin.nuevoPeriodo(jTextFieldFechaInicio, jTextFieldFechaFin);
+        dispose();
     }//GEN-LAST:event_botonActualizarAdminActionPerformed
 
     private void jTextFieldFechaInicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldFechaInicioActionPerformed
