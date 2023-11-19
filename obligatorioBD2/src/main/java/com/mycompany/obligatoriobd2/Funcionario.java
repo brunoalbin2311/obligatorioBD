@@ -4,7 +4,10 @@
  */
 package com.mycompany.obligatoriobd2;
 
+import com.toedter.calendar.JDateChooser;
 import java.awt.HeadlessException;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JPasswordField;
@@ -13,6 +16,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Date;
 
 /**
  *
@@ -25,7 +29,7 @@ public class Funcionario {
     String Cedula;
     String Nombre;
     String Apellido;
-    String FechaNacimiento;
+    Date FechaNacimiento;
     String Direccion;
     String Correo;
     String Telefono;
@@ -70,11 +74,11 @@ public class Funcionario {
         this.Apellido = Apellido;
     }
 
-    public String getFechaNacimiento() {
+    public Date getFechaNacimiento() {
         return FechaNacimiento;
     }
 
-    public void setFechaNacimiento(String FechaNacimiento) {
+    public void setFechaNacimiento(Date FechaNacimiento) {
         this.FechaNacimiento = FechaNacimiento;
     }
 
@@ -102,44 +106,60 @@ public class Funcionario {
         this.Telefono = Telefono;
     }
     
-    public void insertarFuncionario(JTextField cuenta, JTextField contra, JTextField cedula, JTextField nombre, JTextField apellido, JTextField fechaNacimiento, JTextField direccion, JTextField correo, JTextField telefono){
+    public void insertarFuncionario(JTextField cuenta, JPasswordField contra, JTextField cedula, JTextField nombre, JTextField apellido, JDateChooser fechaNacimiento, JTextField direccion, JTextField correo, JTextField telefono){
         
         setCuenta(cuenta.getText());
-        setContra(contra.getText());
+        
+        char[] arrayContra = contra.getPassword();
+        String contraStr = new String(arrayContra); 
+        String contraHasheada = obtenerMD5(contraStr);
+        setContra(contraHasheada);
+
         setCedula(cedula.getText());
         setNombre(nombre.getText());
         setApellido(apellido.getText());
-        setFechaNacimiento(fechaNacimiento.getText());
+        
+        Date fechaSeleccionada = new Date(fechaNacimiento.getDate().getTime());
+        setFechaNacimiento(fechaSeleccionada);
+        
         setDireccion(direccion.getText());
         setCorreo(correo.getText());
         setTelefono(telefono.getText());
         
         CConection coneccion = new CConection();
         
-        String consulta1 = "INSERT INTO Login(LogId, Contra) VALUES (?,?);";
-        String consulta2 = "INSERT INTO Funcionario(Ci, Nombre, Apellido, Fch_Nacimiento, Dirección, Telefono, Email, LogId) VALUES (?,?,?,?,?,?,?,?);";
+        String consulta1 = "INSERT INTO Administracion (LogId, Rol) VALUES (?,?);";
+        String consulta2 = "INSERT INTO Login(LogId, Contra) VALUES (?,?);";
+        String consulta3 = "INSERT INTO Funcionario(Ci, Nombre, Apellido, Fch_Nacimiento, Dirección, Telefono, Email, LogId) VALUES (?,?,?,?,?,?,?,?);";
         
         try {
             
-            CallableStatement cs = coneccion.establecerConexion().prepareCall(consulta1);
+            CallableStatement cs1 = coneccion.establecerConexion().prepareCall(consulta1);
             
-            cs.setString(1, getCuenta());
-            cs.setString(2, getContra());
+            cs1.setString(1, getCuenta());
+            cs1.setBoolean(2, false);
             
-            cs.execute();
+            cs1.execute();
             
             CallableStatement cs2 = coneccion.establecerConexion().prepareCall(consulta2);
             
-            cs2.setString(1, getCedula());
-            cs2.setString(2, getNombre());
-            cs2.setString(3, getApellido());
-            cs2.setString(4, getFechaNacimiento());
-            cs2.setString(5, getDireccion());
-            cs2.setString(6, getTelefono());
-            cs2.setString(7, getCorreo());
-            cs2.setString(8, getCuenta());
+            cs2.setString(1, getCuenta());
+            cs2.setString(2, getContra());
             
             cs2.execute();
+            
+            CallableStatement cs3 = coneccion.establecerConexion().prepareCall(consulta3);
+            
+            cs3.setString(1, getCedula());
+            cs3.setString(2, getNombre());
+            cs3.setString(3, getApellido());
+            cs3.setDate(4, new java.sql.Date(getFechaNacimiento().getTime()));
+            cs3.setString(5, getDireccion());
+            cs3.setString(6, getTelefono());
+            cs3.setString(7, getCorreo());
+            cs3.setString(8, getCuenta());
+            
+            cs3.execute();
             
             JOptionPane.showMessageDialog(null, "Su registro se hizo con exito");
             
@@ -147,12 +167,20 @@ public class Funcionario {
             JOptionPane.showMessageDialog(null, "Su registro no se hizo correctamente, error: "+e.toString());
         }
     }
-    
-    public boolean verificarUsuario(JTextField cuenta, JTextField contra) {
-        
+ 
+    public boolean verificarUsuario(JTextField cuenta, JPasswordField contra) {
         setCuenta(cuenta.getText());
-        setContra(contra.getText());
+
+        char[] arrayContra = contra.getPassword();
+        String contraStr = new String(arrayContra);
         
+        if(!esAdmin()){
+           String contraHasheada = obtenerMD5(contraStr);
+           setContra(contraHasheada); 
+        } else {
+            setContra(contraStr);
+        }
+
         boolean usuarioEncontrado = false;
 
         try {
@@ -175,5 +203,49 @@ public class Funcionario {
             e.printStackTrace();
         }
         return usuarioEncontrado;
+    }
+    
+    public String obtenerMD5(String contra) {
+        try {
+            MessageDigest md = MessageDigest.getInstance("MD5");
+            byte[] messageDigest = md.digest(contra.getBytes());
+
+            // Convertir el hash de bytes a representación hexadecimal
+            StringBuilder hexString = new StringBuilder();
+            for (byte b : messageDigest) {
+                hexString.append(String.format("%02x", b));
+            }
+
+            return hexString.toString();
+
+        } catch (NoSuchAlgorithmException e) {
+            throw new RuntimeException("Error al hashear la contraseña con MD5", e);
+        }
+    }
+    
+    public boolean esAdmin() {
+        boolean esAdmin = false;
+
+        try {
+            CConection conexion = new CConection();
+            Connection connection = conexion.establecerConexion();
+
+            String consulta = "SELECT Rol FROM Administracion WHERE LogId = ?";
+            PreparedStatement ps = connection.prepareStatement(consulta);
+            ps.setString(1, getCuenta());
+
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
+                esAdmin = rs.getBoolean("Rol");
+            }
+
+            rs.close();
+            ps.close();
+            connection.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return esAdmin;
     }
 }

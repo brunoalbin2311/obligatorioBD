@@ -108,13 +108,7 @@ public class PantallaAdmin extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void botonActualizarAdminActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonActualizarAdminActionPerformed
-        Administracion admin = new Administracion();
-        
-        admin.setFechaInicio(jLabelFechaInicio.getText());
-        admin.setFechaFin(jLabelFechaFin.getText());
-        
-        admin.nuevoPeriodo(jTextFieldFechaInicio, jTextFieldFechaFin);
-        dispose();
+
     }//GEN-LAST:event_botonActualizarAdminActionPerformed
 
     private void jTextFieldFechaInicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldFechaInicioActionPerformed

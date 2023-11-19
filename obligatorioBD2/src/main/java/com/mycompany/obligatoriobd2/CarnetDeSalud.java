@@ -4,17 +4,25 @@
  */
 package com.mycompany.obligatoriobd2;
 
+import com.toedter.calendar.JDateChooser;
+import java.awt.HeadlessException;
+import java.sql.CallableStatement;
+import java.sql.SQLException;
+import java.util.Date;
+import javax.swing.JOptionPane;
+import javax.swing.JTextField;
+
 /**
  *
  * @author albin
  */
 public class CarnetDeSalud {
-    
-    String cedula;
-    String fechaEmision;
-    String fechaVencimiento;
-    String comprobante;
 
+    String cedula;
+    Date fechaEmision;
+    Date fechaVencimiento;
+    String comprobante;
+    
     public String getCedula() {
         return cedula;
     }
@@ -23,19 +31,19 @@ public class CarnetDeSalud {
         this.cedula = cedula;
     }
 
-    public String getFechaEmision() {
+    public Date getFechaEmision() {
         return fechaEmision;
     }
 
-    public void setFechaEmision(String fechaEmision) {
+    public void setFechaEmision(Date fechaEmision) {
         this.fechaEmision = fechaEmision;
     }
 
-    public String getFechaVencimiento() {
+    public Date getFechaVencimiento() {
         return fechaVencimiento;
     }
 
-    public void setFechaVencimiento(String fechaVencimiento) {
+    public void setFechaVencimiento(Date fechaVencimiento) {
         this.fechaVencimiento = fechaVencimiento;
     }
 
@@ -45,5 +53,35 @@ public class CarnetDeSalud {
 
     public void setComprobante(String comprobante) {
         this.comprobante = comprobante;
+    }
+
+    public void insertarCarnet(JTextField cedula, JDateChooser fechaEmision, JDateChooser fechaVencimiento, String comprobante){
+        setCedula(cedula.getText());
+        
+        Date fechaEmi = new Date(fechaEmision.getDate().getTime());
+        setFechaEmision(fechaEmi);
+        
+        Date fechaVen = new Date(fechaVencimiento.getDate().getTime());
+        setFechaVencimiento(fechaVen);
+        
+        setComprobante(comprobante);
+        
+        CConection coneccion = new CConection();
+        
+        String consulta = "INSERT INTO Carnet_Salud (Ci, Fch_Emision, Fch_Vencimiento, Comprobante) VALUES (?,?,?,?);";
+        try {
+            
+            CallableStatement cs = coneccion.establecerConexion().prepareCall(consulta);
+            
+            cs.setString(1, getCedula());
+            cs.setDate(2, new java.sql.Date(getFechaEmision().getTime()));
+            cs.setDate(3, new java.sql.Date(getFechaVencimiento().getTime()));
+            cs.setString(4, getComprobante());
+            
+            cs.execute();
+
+        } catch (HeadlessException | SQLException e ){
+            JOptionPane.showMessageDialog(null, "Su registro no se hizo correctamente, error: "+e.toString());
+        }
     }
 }

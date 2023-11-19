@@ -10,12 +10,12 @@ import javax.swing.JOptionPane;
  *
  * @author albin
  */
-public class PantallaLogin extends javax.swing.JFrame {
+public class PantallaLoginAdmin extends javax.swing.JFrame {
 
     /**
      * Creates new form PantallaLogin
      */
-    public PantallaLogin() {
+    public PantallaLoginAdmin() {
         initComponents();
     }
 
@@ -103,8 +103,8 @@ public class PantallaLogin extends javax.swing.JFrame {
         Funcionario funcionario = new Funcionario();
 
         if (funcionario.verificarUsuario(jTextFieldCuenta, jPasswordContra)) {
-            if (!funcionario.esAdmin()) {
-                PantallaPreguntaCarnetComp pantalla = new PantallaPreguntaCarnetComp();
+            if (funcionario.esAdmin()) {
+                PantallaAdmin pantalla = new PantallaAdmin();
                 pantalla.setLocationRelativeTo(null);
                 pantalla.setVisible(true);
                 this.dispose();
@@ -137,20 +137,21 @@ public class PantallaLogin extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(PantallaLogin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(PantallaLoginAdmin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(PantallaLogin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(PantallaLoginAdmin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(PantallaLogin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(PantallaLoginAdmin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(PantallaLogin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(PantallaLoginAdmin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new PantallaLogin().setVisible(true);
+                new PantallaLoginAdmin().setVisible(true);
             }
         });
     }

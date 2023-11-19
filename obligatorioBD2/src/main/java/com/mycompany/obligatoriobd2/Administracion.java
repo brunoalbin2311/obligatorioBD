@@ -21,7 +21,7 @@ public class Administracion {
     static String ano = "2023";
     static String semestre = "2";
     static String fechaInicio = "2023-11-01";
-    static String fechaFin = "2023-11-15";
+    static String fechaFin = "2023-11-25";
 
     public String getAno() {
         return ano;

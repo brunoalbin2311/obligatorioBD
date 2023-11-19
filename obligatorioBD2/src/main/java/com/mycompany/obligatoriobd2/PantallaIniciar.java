@@ -98,26 +98,15 @@ public class PantallaIniciar extends javax.swing.JFrame {
 
     private void botonRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonRegistrarActionPerformed
         
-        Administracion admin = new Administracion();
-        
-        LocalDate fechaActual = LocalDate.now();
-        DateTimeFormatter formato = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-        String fechaHoy = fechaActual.format(formato);
-        
-        if (admin.fechaEstaEnRango(fechaHoy)) {
-            PantallaRegistrarDatos pantalla = new PantallaRegistrarDatos();
-            pantalla.setVisible(true);
-            pantalla.setLocationRelativeTo(null);
-            this.dispose();
-        } else {
-            this.dispose();
-            JOptionPane.showMessageDialog(null, "Periodo no disponible, porfavor comunicarse con soporte");
-            }   
+        PantallaPreguntaCarnetReg pantalla = new PantallaPreguntaCarnetReg();
+        pantalla.setVisible(true);
+        pantalla.setLocationRelativeTo(null);
+        this.dispose();
     }//GEN-LAST:event_botonRegistrarActionPerformed
 
     private void botonAdministrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonAdministrarActionPerformed
         
-        PantallaLogin pantalla = new PantallaLogin();
+        PantallaLoginAdmin pantalla = new PantallaLoginAdmin();
         pantalla.setVisible(true);
         pantalla.setLocationRelativeTo(null);
         this.dispose();
@@ -125,21 +114,10 @@ public class PantallaIniciar extends javax.swing.JFrame {
 
     private void botonIniciarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonIniciarSesionActionPerformed
         
-        Administracion admin = new Administracion();
-        
-        LocalDate fechaActual = LocalDate.now();
-        DateTimeFormatter formato = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-        String fechaHoy = fechaActual.format(formato);
-        
-        if (admin.fechaEstaEnRango(fechaHoy)) {
-            PantallaLogin pantalla = new PantallaLogin();
-            pantalla.setVisible(true);
-            pantalla.setLocationRelativeTo(null);
-            this.dispose();
-        } else {
-            this.dispose();
-            JOptionPane.showMessageDialog(null, "Periodo no disponible, porfavor comunicarse con soporte");
-            }   
+        PantallaLogin pantalla = new PantallaLogin();
+        pantalla.setVisible(true);
+        pantalla.setLocationRelativeTo(null);
+        this.dispose();
     }//GEN-LAST:event_botonIniciarSesionActionPerformed
 
     /**

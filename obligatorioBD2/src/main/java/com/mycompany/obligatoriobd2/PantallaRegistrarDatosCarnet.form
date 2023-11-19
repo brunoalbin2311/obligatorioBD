@@ -23,71 +23,57 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" alignment="0" attributes="0">
-              <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="0" attributes="0">
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" attributes="0">
-                              <Component id="jLabelFechaCarnet" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="jTextFieldFechaVencimiento" min="-2" pref="204" max="-2" attributes="0"/>
-                          </Group>
-                          <Group type="102" attributes="0">
-                              <Component id="jLabelCarnet" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
-                              <Component id="jButtonCarnet" min="-2" pref="167" max="-2" attributes="0"/>
-                          </Group>
-                      </Group>
-                      <EmptySpace pref="23" max="32767" attributes="0"/>
-                  </Group>
-                  <Group type="102" attributes="0">
-                      <Component id="jLabelNoCarnet" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                  </Group>
-                  <Group type="102" alignment="1" attributes="0">
-                      <Group type="103" groupAlignment="1" attributes="0">
-                          <Group type="102" attributes="0">
-                              <Component id="jLabelFechaTelefono" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="32767" attributes="0"/>
-                              <Component id="jTextFieldTelefono1" min="-2" pref="204" max="-2" attributes="0"/>
-                          </Group>
-                          <Group type="102" attributes="0">
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="jLabelCuenta" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jLabelContra" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jLabelCedula" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jLabelNombre" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jLabelApellido" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jLabelFechaNacimiento" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jLabelDireccion" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jLabelFechaTelefono1" alignment="0" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace max="32767" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="103" groupAlignment="1" attributes="0">
-                                      <Component id="jTextFieldCuenta" alignment="0" min="-2" pref="204" max="-2" attributes="0"/>
-                                      <Group type="103" alignment="1" groupAlignment="0" max="-2" attributes="0">
-                                          <Component id="jTextFieldCedula" alignment="1" pref="204" max="32767" attributes="0"/>
-                                          <Component id="jTextFieldNombre" alignment="1" max="32767" attributes="0"/>
-                                          <Component id="jTextFieldApellido" alignment="1" max="32767" attributes="0"/>
-                                      </Group>
-                                      <Component id="jTextFieldFechaNacimiento" alignment="1" min="-2" pref="204" max="-2" attributes="0"/>
-                                      <Component id="jTextFieldDireccion" alignment="1" min="-2" pref="204" max="-2" attributes="0"/>
-                                      <Component id="jTextFieldCorreo" alignment="1" min="-2" pref="204" max="-2" attributes="0"/>
-                                  </Group>
-                                  <Component id="jTextFieldContra" min="-2" pref="204" max="-2" attributes="0"/>
-                              </Group>
-                          </Group>
-                      </Group>
-                      <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
-                  </Group>
-              </Group>
-          </Group>
           <Group type="102" alignment="1" attributes="0">
               <EmptySpace max="32767" attributes="0"/>
               <Component id="botonCompletarDatos" min="-2" pref="72" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="165" max="-2" attributes="0"/>
+          </Group>
+          <Group type="102" alignment="0" attributes="0">
+              <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
+                      <Component id="jLabelCarnet" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace pref="59" max="32767" attributes="0"/>
+                      <Component id="jButtonCarnet" min="-2" pref="204" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="1" attributes="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="jLabelCuenta" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLabelContra" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLabelCedula" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLabelFechaNacimiento" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLabelDireccion" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLabelFechaTelefono1" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLabelFechaTelefono" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLabelNombre" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLabelApellido" alignment="0" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="32767" attributes="0"/>
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Component id="jTextFieldTelefono1" pref="204" max="32767" attributes="0"/>
+                          <Component id="jTextFieldCuenta" alignment="0" pref="204" max="32767" attributes="0"/>
+                          <Component id="jTextFieldCedula" alignment="1" pref="204" max="32767" attributes="0"/>
+                          <Component id="jTextFieldNombre" alignment="1" max="32767" attributes="0"/>
+                          <Component id="jTextFieldApellido" alignment="1" max="32767" attributes="0"/>
+                          <Component id="jTextFieldDireccion" alignment="0" pref="204" max="32767" attributes="0"/>
+                          <Component id="jTextFieldCorreo" alignment="0" pref="204" max="32767" attributes="0"/>
+                          <Component id="jPasswordField1" alignment="0" max="32767" attributes="0"/>
+                          <Component id="jDateNacimiento" alignment="0" max="32767" attributes="0"/>
+                      </Group>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="jLabelFechaCarnet2" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLabelFechaCarnet" alignment="0" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="-2" pref="44" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="jDateEmision" max="32767" attributes="0"/>
+                          <Component id="jDateVencimiento" max="32767" attributes="0"/>
+                      </Group>
+                  </Group>
+              </Group>
+              <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -102,7 +88,7 @@
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jLabelContra" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jTextFieldContra" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jPasswordField1" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
@@ -120,38 +106,41 @@
                   <Component id="jLabelApellido" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="jTextFieldFechaNacimiento" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jLabelFechaNacimiento" alignment="3" min="-2" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="1" attributes="0">
+                  <Component id="jDateNacimiento" min="-2" pref="22" max="-2" attributes="0"/>
+                  <Component id="jLabelFechaNacimiento" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="jTextFieldDireccion" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jLabelDireccion" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jTextFieldDireccion" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace max="-2" attributes="0"/>
+              <EmptySpace min="-2" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jTextFieldCorreo" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jLabelFechaTelefono1" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace max="32767" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="jTextFieldTelefono1" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jLabelFechaTelefono" alignment="3" min="-2" max="-2" attributes="0"/>
-              </Group>
               <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="1" attributes="0">
+                  <Component id="jLabelFechaTelefono" min="-2" max="-2" attributes="0"/>
+                  <Component id="jTextFieldTelefono1" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="jButtonCarnet" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jLabelCarnet" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jButtonCarnet" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace min="-2" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="1" attributes="0">
+                  <Component id="jDateEmision" min="-2" pref="22" max="-2" attributes="0"/>
+                  <Component id="jLabelFechaCarnet" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="jLabelFechaCarnet" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jTextFieldFechaVencimiento" alignment="3" min="-2" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="1" attributes="0">
+                  <Component id="jLabelFechaCarnet2" min="-2" max="-2" attributes="0"/>
+                  <Component id="jDateVencimiento" min="-2" pref="22" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
-              <Component id="jLabelNoCarnet" min="-2" max="-2" attributes="0"/>
-              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <EmptySpace type="separate" pref="30" max="32767" attributes="0"/>
               <Component id="botonCompletarDatos" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="17" max="-2" attributes="0"/>
           </Group>
@@ -206,7 +195,7 @@
     </Component>
     <Component class="javax.swing.JLabel" name="jLabelFechaCarnet">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Fecha vencimiento carnet"/>
+        <Property name="text" type="java.lang.String" value="Fecha emisi&#xf3;n"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="jTextFieldCedula">
@@ -229,11 +218,6 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTextFieldApellidoActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JTextField" name="jTextFieldFechaNacimiento">
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTextFieldFechaNacimientoActionPerformed"/>
-      </Events>
-    </Component>
     <Component class="javax.swing.JTextField" name="jTextFieldDireccion">
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTextFieldDireccionActionPerformed"/>
@@ -244,29 +228,12 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTextFieldCorreoActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JTextField" name="jTextFieldFechaVencimiento">
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTextFieldFechaVencimientoActionPerformed"/>
-      </Events>
-    </Component>
     <Component class="javax.swing.JButton" name="jButtonCarnet">
       <Properties>
         <Property name="text" type="java.lang.String" value="Adjuntar comprobante"/>
       </Properties>
-    </Component>
-    <Component class="javax.swing.JLabel" name="jLabelNoCarnet">
-      <Properties>
-        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Eras Bold ITC" size="14" style="0"/>
-        </Property>
-        <Property name="text" type="java.lang.String" value="No tengo carnet / No tengo carnet vigente"/>
-        <Property name="toolTipText" type="java.lang.String" value=""/>
-      </Properties>
       <Events>
-        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jLabelNoCarnetMouseClicked"/>
-        <EventHandler event="mouseEntered" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jLabelNoCarnetMouseEntered"/>
-        <EventHandler event="mouseExited" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jLabelNoCarnetMouseExited"/>
-        <EventHandler event="mouseReleased" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jLabelNoCarnetMouseReleased"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonCarnetActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JButton" name="botonCompletarDatos">
@@ -275,11 +242,6 @@
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="botonCompletarDatosActionPerformed"/>
-      </Events>
-    </Component>
-    <Component class="javax.swing.JTextField" name="jTextFieldContra">
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTextFieldContraActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="jTextFieldTelefono1">
@@ -291,6 +253,22 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Correo"/>
       </Properties>
+    </Component>
+    <Component class="javax.swing.JPasswordField" name="jPasswordField1">
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jPasswordField1ActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabelFechaCarnet2">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Fecha vencimiento"/>
+      </Properties>
+    </Component>
+    <Component class="com.toedter.calendar.JDateChooser" name="jDateNacimiento">
+    </Component>
+    <Component class="com.toedter.calendar.JDateChooser" name="jDateEmision">
+    </Component>
+    <Component class="com.toedter.calendar.JDateChooser" name="jDateVencimiento">
     </Component>
   </SubComponents>
 </Form>

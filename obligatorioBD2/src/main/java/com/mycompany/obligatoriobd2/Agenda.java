@@ -4,6 +4,7 @@
      */
     package com.mycompany.obligatoriobd2;
 
+import com.toedter.calendar.JDateChooser;
     import java.awt.HeadlessException;
     import java.sql.CallableStatement;
     import java.sql.ResultSet;
@@ -11,6 +12,7 @@
     import java.text.ParseException;
     import java.text.SimpleDateFormat;
     import java.util.Calendar;
+import java.util.Date;
     import javax.swing.JOptionPane;
     import javax.swing.JTextField;
 
@@ -20,107 +22,46 @@
      */
     public class Agenda {
 
-        String cedula;
-        String fecha;
-        String comprobante = "ruta";
+    String cedula;
+    Date fecha;
+        
+    public String getCedula() {
+        return cedula;
+    }
 
-        public String getComprobante() {
-            return comprobante;
-        }
+    public void setCedula(String cedula) {
+        this.cedula = cedula;
+    }
 
-        public void setComprobante(String comprobante) {
-            this.comprobante = comprobante;
-        }
+    public Date getFecha() {
+        return fecha;
+    }
 
-        public String getCedula() {
-            return cedula;
-        }
+    public void setFecha(Date fecha) {
+        this.fecha = fecha;
+    }
 
-        public void setCedula(String cedula) {
-            this.cedula = cedula;
-        }
+      
+    public void insertarAgenda(JTextField cedula, JDateChooser fecha){
+        setCedula(cedula.getText());
+        
+        Date fechaDate = new Date(fecha.getDate().getTime());
+        setFecha(fechaDate);
+        
+        CConection coneccion = new CConection();
+        
+        String consulta = "INSERT INTO Agenda (Ci, Fch_Agenda) VALUES (?,?);";
+        try {
+            
+            CallableStatement cs = coneccion.establecerConexion().prepareCall(consulta);
+            
+            cs.setString(1, getCedula());
+            cs.setDate(2, new java.sql.Date(getFecha().getTime()));
+            
+            cs.execute();
 
-        public String getFecha() {
-            return fecha;
-        }
-
-        public void setFecha(String fecha) {
-            this.fecha = fecha;
-        }
-
-        public void insertarAgenda(String cedula) throws ParseException{
-
-            setCedula(cedula);
-
-            String nuevaFecha = obtenerFechaFuturaNoRegistrada();
-
-            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-            Calendar calendar = Calendar.getInstance();
-            calendar.setTime(dateFormat.parse(nuevaFecha));
-            calendar.add(Calendar.YEAR, 1);
-            String nuevaFechaMasUnAnio = dateFormat.format(calendar.getTime());
-
-
-            CConection coneccion = new CConection();
-
-            String consulta1 = "INSERT INTO Agenda(Ci, Fch_Agenda) VALUES (?, ?);";
-            String consulta2 = "INSERT INTO Carnet_Salud(Ci, Fch_Emision, Fch_Vencimiento, Comprobante) VALUES (?, ?, ?, ?);";
-
-            try {
-                CallableStatement cs1 = coneccion.establecerConexion().prepareCall(consulta1);
-
-                cs1.setString(1, getCedula());
-                cs1.setString(2, nuevaFecha);
-
-                cs1.execute();
-
-                CallableStatement cs2 = coneccion.establecerConexion().prepareCall(consulta2);
-
-                cs2.setString(1, getCedula());
-                cs2.setString(2, nuevaFecha);
-                cs2.setString(3, nuevaFechaMasUnAnio);
-                cs2.setString(4, getComprobante());
-
-                cs2.execute();
-
-                JOptionPane.showMessageDialog(null, "Usted quedó agendado para la fecha: " + nuevaFecha);
-
-            } catch (HeadlessException | SQLException e) {
-                JOptionPane.showMessageDialog(null, "Error al registrar la agenda: " + e.toString());
-            }
-        }
-
-        private String obtenerFechaFuturaNoRegistrada() {
-            CConection coneccion = new CConection();
-            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-
-            Calendar calendar = Calendar.getInstance();
-            calendar.add(Calendar.DAY_OF_MONTH, 1);
-
-            try {
-                String fechaPropuesta = dateFormat.format(calendar.getTime());
-
-                String consultaVerificar = "SELECT COUNT(*) FROM Agenda WHERE Fch_Agenda = ?";
-                CallableStatement csVerificar = coneccion.establecerConexion().prepareCall(consultaVerificar);
-                csVerificar.setString(1, fechaPropuesta);
-
-                ResultSet rs = csVerificar.executeQuery();
-                rs.next();
-
-                while (rs.getInt(1) > 0) {
-                    calendar.add(Calendar.DAY_OF_MONTH, 1);
-                    fechaPropuesta = dateFormat.format(calendar.getTime());
-
-                    csVerificar.setString(1, fechaPropuesta);
-                    rs = csVerificar.executeQuery();
-                    rs.next();
-                }
-
-                return fechaPropuesta;
-
-            } catch (SQLException e) {
-                JOptionPane.showMessageDialog(null, "Error al verificar la fecha: " + e.toString());
-                return null;
-            }
+        } catch (HeadlessException | SQLException e ){
+            JOptionPane.showMessageDialog(null, "Su registro no se hizo correctamente, error: "+e.toString());
         }
     }
+}
