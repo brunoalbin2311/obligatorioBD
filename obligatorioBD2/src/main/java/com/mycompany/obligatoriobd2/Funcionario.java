@@ -168,6 +168,38 @@ public class Funcionario {
         }
     }
  
+    public boolean verificarDatos(JTextField cedula, JTextField nombre, JTextField apellido, JDateChooser fechaNacimiento) throws SQLException{
+        setCedula(cedula.getText());
+        setNombre(nombre.getText());
+        setApellido(apellido.getText());
+        Date fechaSeleccionada = new Date(fechaNacimiento.getDate().getTime());
+        setFechaNacimiento(fechaSeleccionada);
+        
+        boolean datosCorrectos = false;
+        try{
+            CConection conexion = new CConection();
+            Connection connection = conexion.establecerConexion();
+
+            String consulta = "SELECT * FROM Funcionario WHERE Ci = ? AND Nombre = ? AND Apellido = ? AND Fch_Nacimiento = ?";
+            PreparedStatement ps = connection.prepareStatement(consulta);
+            ps.setString(1, getCedula());
+            ps.setString(2, getNombre());
+            ps.setString(3, getApellido());
+            ps.setDate(4, new java.sql.Date(getFechaNacimiento().getTime()));
+
+            ResultSet rs = ps.executeQuery();
+
+            datosCorrectos = rs.next();
+
+            rs.close();
+            ps.close();
+            connection.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return datosCorrectos;
+    }
+    
     public boolean verificarUsuario(JTextField cuenta, JPasswordField contra) {
         setCuenta(cuenta.getText());
 

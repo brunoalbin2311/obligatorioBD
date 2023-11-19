@@ -6,7 +6,11 @@ package com.mycompany.obligatoriobd2;
 
 import java.awt.Color;
 import java.io.File;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -194,10 +198,18 @@ public class PantallaCompletarDatosCarnet extends javax.swing.JFrame {
 
     private void botonCompletarDatosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonCompletarDatosActionPerformed
         Funcionario funcionario = new Funcionario();
-        CarnetDeSalud carnet = new CarnetDeSalud();
-        
-        carnet.insertarCarnet(jTextFieldCedula, jDateEmision, jDateVencimiento, getUbicacionArchivo());
-        dispose();
+
+        try {
+            if (funcionario.verificarDatos(jTextFieldCedula, jTextFieldNombre, jTextFieldApellido, jDateNacimiento)) {
+                CarnetDeSalud carnet = new CarnetDeSalud();
+                carnet.insertarCarnet(jTextFieldCedula, jDateEmision, jDateVencimiento, getUbicacionArchivo());
+                dispose();
+            } else {
+                JOptionPane.showMessageDialog(this, "Datos ingresados incorrectamente");
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(PantallaCompletarDatosCarnet.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_botonCompletarDatosActionPerformed
 
     private void jButtonCarnetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCarnetActionPerformed
