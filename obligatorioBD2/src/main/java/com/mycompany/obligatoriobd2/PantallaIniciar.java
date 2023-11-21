@@ -97,15 +97,21 @@ public class PantallaIniciar extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void botonRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonRegistrarActionPerformed
-        
-        PantallaPreguntaCarnetReg pantalla = new PantallaPreguntaCarnetReg();
-        pantalla.setVisible(true);
-        pantalla.setLocationRelativeTo(null);
-        this.dispose();
+        Administracion admin = new Administracion();
+        if (admin.fechaDisponible()) {
+            // La fecha está disponible, realizar las acciones necesarias
+            PantallaPreguntaCarnetReg pantalla = new PantallaPreguntaCarnetReg();
+            pantalla.setVisible(true);
+            pantalla.setLocationRelativeTo(null);
+            this.dispose();
+        } else {
+            // La fecha no está disponible, mostrar un mensaje o realizar otras acciones
+            JOptionPane.showMessageDialog(null, "La fecha actual no está dentro del rango permitido.");
+        }
     }//GEN-LAST:event_botonRegistrarActionPerformed
 
     private void botonAdministrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonAdministrarActionPerformed
-        
+       
         PantallaLoginAdmin pantalla = new PantallaLoginAdmin();
         pantalla.setVisible(true);
         pantalla.setLocationRelativeTo(null);

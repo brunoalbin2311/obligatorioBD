@@ -6,6 +6,7 @@ package com.mycompany.obligatoriobd2;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import javax.swing.JOptionPane;
 
 /**
@@ -34,5 +35,9 @@ public class CConection {
             JOptionPane.showMessageDialog(null, "Error al conectarse con la base de datos, error: "+e.toString());
         }
         return conectar;
+    }
+
+    PreparedStatement prepareStatement(String consulta) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 }

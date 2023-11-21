@@ -32,8 +32,8 @@ public class PantallaAdmin extends javax.swing.JFrame {
         botonActualizarAdmin = new javax.swing.JButton();
         jLabelFechaInicio = new javax.swing.JLabel();
         jLabelTituloAdmin = new javax.swing.JLabel();
-        jTextFieldFechaInicio = new javax.swing.JTextField();
-        jTextFieldFechaFin = new javax.swing.JTextField();
+        jDateChooserInicio = new com.toedter.calendar.JDateChooser();
+        jDateChooserFin = new com.toedter.calendar.JDateChooser();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -51,18 +51,6 @@ public class PantallaAdmin extends javax.swing.JFrame {
         jLabelTituloAdmin.setFont(new java.awt.Font("Arial Black", 0, 16)); // NOI18N
         jLabelTituloAdmin.setText("Modificación fecha período de actualización de datos");
 
-        jTextFieldFechaInicio.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextFieldFechaInicioActionPerformed(evt);
-            }
-        });
-
-        jTextFieldFechaFin.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextFieldFechaFinActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -77,10 +65,10 @@ public class PantallaAdmin extends javax.swing.JFrame {
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabelFechaInicio)
                                     .addComponent(jLabelFechaFin))
-                                .addGap(18, 18, 18)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jTextFieldFechaInicio)
-                                    .addComponent(jTextFieldFechaFin, javax.swing.GroupLayout.DEFAULT_SIZE, 116, Short.MAX_VALUE)))))
+                                    .addComponent(jDateChooserInicio, javax.swing.GroupLayout.DEFAULT_SIZE, 133, Short.MAX_VALUE)
+                                    .addComponent(jDateChooserFin, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(210, 210, 210)
                         .addComponent(botonActualizarAdmin, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -91,15 +79,15 @@ public class PantallaAdmin extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(22, 22, 22)
                 .addComponent(jLabelTituloAdmin)
-                .addGap(31, 31, 31)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGap(27, 27, 27)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabelFechaInicio)
-                    .addComponent(jTextFieldFechaInicio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(12, 12, 12)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabelFechaFin)
-                    .addComponent(jTextFieldFechaFin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 23, Short.MAX_VALUE)
+                    .addComponent(jDateChooserInicio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(20, 20, 20)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jDateChooserFin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabelFechaFin))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 19, Short.MAX_VALUE)
                 .addComponent(botonActualizarAdmin)
                 .addGap(17, 17, 17))
         );
@@ -108,16 +96,10 @@ public class PantallaAdmin extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void botonActualizarAdminActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonActualizarAdminActionPerformed
-
+        Administracion admin = new Administracion();
+        admin.actualizarPeriodo(jDateChooserInicio, jDateChooserFin);
+        dispose();
     }//GEN-LAST:event_botonActualizarAdminActionPerformed
-
-    private void jTextFieldFechaInicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldFechaInicioActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextFieldFechaInicioActionPerformed
-
-    private void jTextFieldFechaFinActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldFechaFinActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextFieldFechaFinActionPerformed
 
     /**
      * @param args the command line arguments
@@ -156,10 +138,10 @@ public class PantallaAdmin extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botonActualizarAdmin;
+    private com.toedter.calendar.JDateChooser jDateChooserFin;
+    private com.toedter.calendar.JDateChooser jDateChooserInicio;
     private javax.swing.JLabel jLabelFechaFin;
     private javax.swing.JLabel jLabelFechaInicio;
     private javax.swing.JLabel jLabelTituloAdmin;
-    private javax.swing.JTextField jTextFieldFechaFin;
-    private javax.swing.JTextField jTextFieldFechaInicio;
     // End of variables declaration//GEN-END:variables
 }

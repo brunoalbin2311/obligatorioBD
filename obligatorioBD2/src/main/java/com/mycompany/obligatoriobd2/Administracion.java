@@ -4,11 +4,18 @@
  */
 package com.mycompany.obligatoriobd2;
 
+import com.toedter.calendar.JDateChooser;
 import java.awt.HeadlessException;
 import java.sql.CallableStatement;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.Date;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
@@ -17,12 +24,12 @@ import javax.swing.JTextField;
  * @author albin
  */
 public class Administracion {
-    
-    static String ano = "2023";
-    static String semestre = "2";
-    static String fechaInicio = "2023-11-01";
-    static String fechaFin = "2023-11-25";
 
+    String ano;
+    String semestre;
+    Date fechaInicio;
+    Date fechaFin;
+    
     public String getAno() {
         return ano;
     }
@@ -39,33 +46,23 @@ public class Administracion {
         this.semestre = semestre;
     }
 
-    public String getFechaInicio() {
+    public Date getFechaInicio() {
         return fechaInicio;
     }
 
-    public void setFechaInicio(String fechaInicio) {
+    public void setFechaInicio(Date fechaInicio) {
         this.fechaInicio = fechaInicio;
     }
 
-    public String getFechaFin() {
+    public Date getFechaFin() {
         return fechaFin;
     }
 
-    public void setFechaFin(String fechaFin) {
+    public void setFechaFin(Date fechaFin) {
         this.fechaFin = fechaFin;
     }
     
-    public boolean fechaEstaEnRango(String fecha) {
-        DateTimeFormatter formato = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-
-        LocalDate fechaObjeto = LocalDate.parse(fecha, formato);
-        LocalDate inicioObjeto = LocalDate.parse(fechaInicio, formato);
-        LocalDate finObjeto = LocalDate.parse(fechaFin, formato);
-
-        return (fechaObjeto.isEqual(inicioObjeto) || fechaObjeto.isAfter(inicioObjeto)) && (fechaObjeto.isEqual(finObjeto) || fechaObjeto.isBefore(finObjeto));
-    }
-    
-    public void nuevoPeriodo(JTextField fechaInicio, JTextField fechaFin){
+    public void actualizarPeriodo(JDateChooser fechaInicio, JDateChooser fechaFin){
         
         LocalDate fechaActual = LocalDate.now(); 
         String anioActual = String.valueOf(fechaActual.getYear());
@@ -78,8 +75,10 @@ public class Administracion {
             setSemestre("2");
         }
         
-        setFechaInicio(fechaInicio.getText());
-        setFechaFin(fechaFin.getText());
+        Date fechaIn = new Date(fechaInicio.getDate().getTime());
+        setFechaInicio(fechaIn);
+        Date fechaF = new Date(fechaFin.getDate().getTime());
+        setFechaFin(fechaF); 
         
         CConection coneccion = new CConection();
         
@@ -91,16 +90,48 @@ public class Administracion {
             
             cs.setString(1, getAno());
             cs.setString(2, getSemestre());
-            cs.setString(3, getFechaInicio());
-            cs.setString(4, getFechaFin());
+            cs.setDate(3, new java.sql.Date(getFechaInicio().getTime()));
+            cs.setDate(4, new java.sql.Date(getFechaFin().getTime()));
             
             cs.execute();
             
-            JOptionPane.showMessageDialog(null, "Actualización de periodo con exito, fecha de inicio: ("+getFechaInicio()+"), fecha final ("+getFechaFin()+")");
+            SimpleDateFormat formatoFecha = new SimpleDateFormat("dd/MM/yyyy");
+            JOptionPane.showMessageDialog(null, "Actualización de periodo con exito, fecha de inicio: ("+formatoFecha.format(getFechaInicio())+"), fecha final ("+formatoFecha.format(getFechaFin())+")");
             
         } catch (HeadlessException | SQLException e ){
             JOptionPane.showMessageDialog(null, "Su registro no se hizo correctamente, error: "+e.toString());
         }
     }
+    
+    public boolean fechaDisponible() {
+        boolean disponible = false;
 
+        try {
+            CConection conexion = new CConection();
+            Connection connection = conexion.establecerConexion();
+
+            String consulta = "SELECT Fch_Inicio, Fch_Fin FROM Periodos_Actualizacion ORDER BY Nro DESC LIMIT 1";
+
+            PreparedStatement ps = connection.prepareStatement(consulta);
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
+                Date fechaInicio = rs.getDate("Fch_Inicio");
+                Date fechaFin = rs.getDate("Fch_Fin");
+
+                Date fechaActual = new Date();
+                if (fechaActual.after(fechaInicio) && fechaActual.before(fechaFin)) {
+                    disponible = true;   
+                }
+            }
+            
+            rs.close();
+            ps.close();
+            connection.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return disponible;
+    }
 }

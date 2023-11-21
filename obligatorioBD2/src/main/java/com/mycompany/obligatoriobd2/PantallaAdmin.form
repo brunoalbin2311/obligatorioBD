@@ -34,10 +34,10 @@
                                   <Component id="jLabelFechaInicio" alignment="0" min="-2" max="-2" attributes="0"/>
                                   <Component id="jLabelFechaFin" alignment="0" min="-2" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Component id="jTextFieldFechaInicio" max="32767" attributes="0"/>
-                                  <Component id="jTextFieldFechaFin" pref="116" max="32767" attributes="0"/>
+                                  <Component id="jDateChooserInicio" pref="133" max="32767" attributes="0"/>
+                                  <Component id="jDateChooserFin" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
@@ -56,17 +56,17 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
               <Component id="jLabelTituloAdmin" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="jLabelFechaInicio" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jTextFieldFechaInicio" alignment="3" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="1" attributes="0">
+                  <Component id="jLabelFechaInicio" min="-2" max="-2" attributes="0"/>
+                  <Component id="jDateChooserInicio" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="jLabelFechaFin" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jTextFieldFechaFin" alignment="3" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="1" attributes="0">
+                  <Component id="jDateChooserFin" min="-2" max="-2" attributes="0"/>
+                  <Component id="jLabelFechaFin" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="23" max="32767" attributes="0"/>
+              <EmptySpace pref="19" max="32767" attributes="0"/>
               <Component id="botonActualizarAdmin" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="17" max="-2" attributes="0"/>
           </Group>
@@ -100,15 +100,9 @@
         <Property name="text" type="java.lang.String" value="Modificaci&#xf3;n fecha per&#xed;odo de actualizaci&#xf3;n de datos"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="jTextFieldFechaInicio">
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTextFieldFechaInicioActionPerformed"/>
-      </Events>
+    <Component class="com.toedter.calendar.JDateChooser" name="jDateChooserInicio">
     </Component>
-    <Component class="javax.swing.JTextField" name="jTextFieldFechaFin">
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTextFieldFechaFinActionPerformed"/>
-      </Events>
+    <Component class="com.toedter.calendar.JDateChooser" name="jDateChooserFin">
     </Component>
   </SubComponents>
 </Form>
