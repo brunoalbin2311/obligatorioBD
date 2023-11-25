@@ -5,6 +5,7 @@
 package com.mycompany.obligatoriobd2;
 
 import java.time.LocalDate;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -97,8 +98,19 @@ public class PantallaAdmin extends javax.swing.JFrame {
 
     private void botonActualizarAdminActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonActualizarAdminActionPerformed
         Administracion admin = new Administracion();
-        admin.actualizarPeriodo(jDateChooserInicio, jDateChooserFin);
-        dispose();
+    
+        int resultadoVerificacion = admin.verificarFechas(jDateChooserInicio, jDateChooserFin);
+
+        if (resultadoVerificacion == 1) {
+            JOptionPane.showMessageDialog(null, "¡ERROR! Ingrese algun campo tiene una fecha no válida");
+        } else if (resultadoVerificacion == 2) {
+            JOptionPane.showMessageDialog(null, "¡ERROR! Ingreso alguna fecha que ya pasó, porfavor ingrese una fecha válida");
+        } else if (resultadoVerificacion == 3) {
+            JOptionPane.showMessageDialog(null, "¡ERROR! Ingrese las fechas en el orden correcto");
+        } else {
+            admin.actualizarPeriodo(jDateChooserInicio, jDateChooserFin);
+            dispose();
+        }
     }//GEN-LAST:event_botonActualizarAdminActionPerformed
 
     /**

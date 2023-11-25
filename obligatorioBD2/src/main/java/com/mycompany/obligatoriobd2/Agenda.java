@@ -12,7 +12,7 @@ import com.toedter.calendar.JDateChooser;
     import java.text.ParseException;
     import java.text.SimpleDateFormat;
     import java.util.Calendar;
-import java.util.Date;
+    import java.util.Date;
     import javax.swing.JOptionPane;
     import javax.swing.JTextField;
 
@@ -41,16 +41,16 @@ import java.util.Date;
         this.fecha = fecha;
     }
 
-      
     public void insertarAgenda(JTextField cedula, JDateChooser fecha){
-        setCedula(cedula.getText());
         
+        setCedula(cedula.getText());
         Date fechaDate = new Date(fecha.getDate().getTime());
         setFecha(fechaDate);
         
         CConection coneccion = new CConection();
         
         String consulta = "INSERT INTO Agenda (Ci, Fch_Agenda) VALUES (?,?);";
+        
         try {
             
             CallableStatement cs = coneccion.establecerConexion().prepareCall(consulta);

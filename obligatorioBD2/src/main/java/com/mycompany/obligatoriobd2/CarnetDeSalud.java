@@ -56,19 +56,18 @@ public class CarnetDeSalud {
     }
 
     public void insertarCarnet(JTextField cedula, JDateChooser fechaEmision, JDateChooser fechaVencimiento, String comprobante){
-        setCedula(cedula.getText());
         
+        setCedula(cedula.getText());
         Date fechaEmi = new Date(fechaEmision.getDate().getTime());
         setFechaEmision(fechaEmi);
-        
         Date fechaVen = new Date(fechaVencimiento.getDate().getTime());
         setFechaVencimiento(fechaVen);
-        
         setComprobante(comprobante);
         
         CConection coneccion = new CConection();
         
         String consulta = "INSERT INTO Carnet_Salud (Ci, Fch_Emision, Fch_Vencimiento, Comprobante) VALUES (?,?,?,?);";
+        
         try {
             
             CallableStatement cs = coneccion.establecerConexion().prepareCall(consulta);

@@ -26,7 +26,7 @@ public class Funcionario {
    
     String cuenta;
     String contra;
-    String Cedula;
+    int Cedula;
     String Nombre;
     String Apellido;
     Date FechaNacimiento;
@@ -50,11 +50,11 @@ public class Funcionario {
         this.contra = contra;
     }
 
-    public String getCedula() {
+    public int getCedula() {
         return Cedula;
     }
 
-    public void setCedula(String Cedula) {
+    public void setCedula(int Cedula) {
         this.Cedula = Cedula;
     }
 
@@ -114,14 +114,11 @@ public class Funcionario {
         String contraStr = new String(arrayContra); 
         String contraHasheada = obtenerMD5(contraStr);
         setContra(contraHasheada);
-
-        setCedula(cedula.getText());
+        setCedula(Integer.valueOf(cedula.getText()));
         setNombre(nombre.getText());
         setApellido(apellido.getText());
-        
         Date fechaSeleccionada = new Date(fechaNacimiento.getDate().getTime());
         setFechaNacimiento(fechaSeleccionada);
-        
         setDireccion(direccion.getText());
         setCorreo(correo.getText());
         setTelefono(telefono.getText());
@@ -150,7 +147,7 @@ public class Funcionario {
             
             CallableStatement cs3 = coneccion.establecerConexion().prepareCall(consulta3);
             
-            cs3.setString(1, getCedula());
+            cs3.setInt(1, getCedula());
             cs3.setString(2, getNombre());
             cs3.setString(3, getApellido());
             cs3.setDate(4, new java.sql.Date(getFechaNacimiento().getTime()));
@@ -168,21 +165,25 @@ public class Funcionario {
         }
     }
  
-    public boolean verificarDatos(JTextField cedula, JTextField nombre, JTextField apellido, JDateChooser fechaNacimiento) throws SQLException{
-        setCedula(cedula.getText());
+    public boolean actualizarDatos(JTextField cedula, JTextField nombre, JTextField apellido, JDateChooser fechaNacimiento) throws SQLException{
+        
+        setCedula(Integer.valueOf(cedula.getText()));
         setNombre(nombre.getText());
         setApellido(apellido.getText());
         Date fechaSeleccionada = new Date(fechaNacimiento.getDate().getTime());
         setFechaNacimiento(fechaSeleccionada);
         
         boolean datosCorrectos = false;
-        try{
+        
+        String consulta = "UPDATE Funcionario SET Nombre = ?, Apellido = ?, Fch_Nacimiento = ? WHERE Ci = ?";
+        
+        try {
+            
             CConection conexion = new CConection();
             Connection connection = conexion.establecerConexion();
 
-            String consulta = "SELECT * FROM Funcionario WHERE Ci = ? AND Nombre = ? AND Apellido = ? AND Fch_Nacimiento = ?";
             PreparedStatement ps = connection.prepareStatement(consulta);
-            ps.setString(1, getCedula());
+            ps.setInt(1, getCedula());
             ps.setString(2, getNombre());
             ps.setString(3, getApellido());
             ps.setDate(4, new java.sql.Date(getFechaNacimiento().getTime()));
@@ -201,6 +202,7 @@ public class Funcionario {
     }
     
     public boolean verificarUsuario(JTextField cuenta, JPasswordField contra) {
+        
         setCuenta(cuenta.getText());
 
         char[] arrayContra = contra.getPassword();
@@ -242,7 +244,6 @@ public class Funcionario {
             MessageDigest md = MessageDigest.getInstance("MD5");
             byte[] messageDigest = md.digest(contra.getBytes());
 
-            // Convertir el hash de bytes a representación hexadecimal
             StringBuilder hexString = new StringBuilder();
             for (byte b : messageDigest) {
                 hexString.append(String.format("%02x", b));
@@ -251,7 +252,7 @@ public class Funcionario {
             return hexString.toString();
 
         } catch (NoSuchAlgorithmException e) {
-            throw new RuntimeException("Error al hashear la contraseña con MD5", e);
+            throw new RuntimeException("ERROR DE HASHEO", e);
         }
     }
     

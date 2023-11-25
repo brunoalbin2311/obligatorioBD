@@ -36,8 +36,4 @@ public class CConection {
         }
         return conectar;
     }
-
-    PreparedStatement prepareStatement(String consulta) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
 }

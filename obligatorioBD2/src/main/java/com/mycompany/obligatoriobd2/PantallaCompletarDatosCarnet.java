@@ -200,7 +200,7 @@ public class PantallaCompletarDatosCarnet extends javax.swing.JFrame {
         Funcionario funcionario = new Funcionario();
 
         try {
-            if (funcionario.verificarDatos(jTextFieldCedula, jTextFieldNombre, jTextFieldApellido, jDateNacimiento)) {
+            if (funcionario.actualizarDatos(jTextFieldCedula, jTextFieldNombre, jTextFieldApellido, jDateNacimiento)) {
                 CarnetDeSalud carnet = new CarnetDeSalud();
                 carnet.insertarCarnet(jTextFieldCedula, jDateEmision, jDateVencimiento, getUbicacionArchivo());
                 dispose();

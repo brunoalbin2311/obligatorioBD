@@ -25,24 +25,24 @@ import javax.swing.JTextField;
  */
 public class Administracion {
 
-    String ano;
-    String semestre;
+    int ano;
+    int semestre;
     Date fechaInicio;
     Date fechaFin;
     
-    public String getAno() {
+    public int getAno() {
         return ano;
     }
 
-    public void setAno(String ano) {
+    public void setAno(int ano) {
         this.ano = ano;
     }
 
-    public String getSemestre() {
+    public int getSemestre() {
         return semestre;
     }
 
-    public void setSemestre(String semestre) {
+    public void setSemestre(int semestre) {
         this.semestre = semestre;
     }
 
@@ -65,14 +65,14 @@ public class Administracion {
     public void actualizarPeriodo(JDateChooser fechaInicio, JDateChooser fechaFin){
         
         LocalDate fechaActual = LocalDate.now(); 
-        String anioActual = String.valueOf(fechaActual.getYear());
+        int anioActual = Integer.valueOf(fechaActual.getYear());
         setAno(anioActual);
         
         int mesActual = fechaActual.getMonthValue(); 
         if (mesActual <= 6) {
-            setSemestre("1");
+            setSemestre(1);
         } else {
-            setSemestre("2");
+            setSemestre(2);
         }
         
         Date fechaIn = new Date(fechaInicio.getDate().getTime());
@@ -88,8 +88,8 @@ public class Administracion {
             
             CallableStatement cs = coneccion.establecerConexion().prepareCall(consulta);
             
-            cs.setString(1, getAno());
-            cs.setString(2, getSemestre());
+            cs.setInt(1, getAno());
+            cs.setInt(2, getSemestre());
             cs.setDate(3, new java.sql.Date(getFechaInicio().getTime()));
             cs.setDate(4, new java.sql.Date(getFechaFin().getTime()));
             
@@ -133,5 +133,27 @@ public class Administracion {
         }
 
         return disponible;
+    }
+    
+    public int verificarFechas(JDateChooser fechaInicio, JDateChooser fechaFin){
+        Date fechaInicial = fechaInicio.getDate();
+        Date fechaFinal = fechaFin.getDate();
+        LocalDate fechaHoy = LocalDate.now();
+        Date fechaHoyDate = java.sql.Date.valueOf(fechaHoy); 
+
+
+        if (fechaInicial == null || fechaFinal == null) {
+            return 1;
+        }
+        
+        if (fechaInicial.before(fechaHoyDate) || fechaFinal.before(fechaHoyDate)) {
+            return 2;
+        }
+
+        if (fechaInicial.after(fechaFinal)) {
+            return 3;
+        }
+        
+        return 4;
     }
 }
