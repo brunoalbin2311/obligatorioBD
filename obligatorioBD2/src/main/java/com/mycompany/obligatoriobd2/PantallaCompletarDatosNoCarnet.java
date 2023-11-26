@@ -5,6 +5,7 @@
 package com.mycompany.obligatoriobd2;
 
 import java.awt.Color;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -153,9 +154,30 @@ public class PantallaCompletarDatosNoCarnet extends javax.swing.JFrame {
     private void botonCompletarDatosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonCompletarDatosActionPerformed
         Funcionario funcionario = new Funcionario();
         Agenda agenda = new Agenda();
-
-        agenda.insertarAgenda(jTextFieldCedula, jDateAgenda);
-        dispose();
+                    
+        switch (funcionario.verificarFuncionario(jTextFieldCedula, jTextFieldNombre, jTextFieldApellido, jDateNacimiento)) {
+           
+            case 3 -> JOptionPane.showMessageDialog(null, "¡ERROR! El campo 'CEDULA' se encuentra vacío.");
+            case 33 -> JOptionPane.showMessageDialog(null, "¡ERROR! El campo 'CEDULA' no tiene una cédula valida.");
+            case 4 -> JOptionPane.showMessageDialog(null, "¡ERROR! El campo 'NOMBRE' se encuentra vacío.");
+            case 44 -> JOptionPane.showMessageDialog(null, "¡ERROR! El campo 'NOMBRE' tiene caracteres no permitidos, ingrese solo letras o sos chino hdp.");
+            case 5 -> JOptionPane.showMessageDialog(null, "¡ERROR! El campo 'APELLIDO' se encuentra vacío.");
+            case 55 -> JOptionPane.showMessageDialog(null, "¡ERROR! El campo 'APELLIDO' tiene caracteres no permitidos, ingrese solo letras.");
+            case 6 -> JOptionPane.showMessageDialog(null, "¡ERROR! El campo 'FECHA DE NACIMIENTO' se encuentra vacío.");
+            case 66 -> JOptionPane.showMessageDialog(null, "¡ERROR! El campo 'FECHA DE NACIMIENTO' tiene una fecha no válida.");
+            default -> {
+                    switch (agenda.verificarFechaAgenda(jDateAgenda)) {
+                    case 1 -> JOptionPane.showMessageDialog(null, "¡ERROR! El campo para seleccionar una fecha de agenda se encuentra vacío.");
+                    case 2 -> JOptionPane.showMessageDialog(null, "¡ERROR! El campo para seleccionar una fecha de agenda tiene una fecha no disponible.");
+                        default -> {
+                            funcionario.actualizarDatos(jTextFieldCedula, jTextFieldNombre, jTextFieldApellido, jDateNacimiento);
+                            agenda.insertarAgenda(jTextFieldCedula, jDateAgenda);
+                            dispose();
+                        }
+                }
+        
+            }
+        }
     }//GEN-LAST:event_botonCompletarDatosActionPerformed
 
     /**

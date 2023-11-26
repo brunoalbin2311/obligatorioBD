@@ -188,14 +188,14 @@ public class Funcionario {
         }
     }
     
-    private boolean actualizarDatos(JTextField cedula, JTextField nombre, JTextField apellido, JDateChooser fechaNacimiento) {
+    public boolean actualizarDatos(JTextField cedula, JTextField nombre, JTextField apellido, JDateChooser fechaNacimiento) {
         boolean datosCorrectos = false;
         String LogId = obtenerUltimoLogId();
         try {
             CConection coneccion = new CConection();
             Connection connection = coneccion.establecerConexion();
 
-            String consulta = "UPDATE Funcionario SET Ci = ?, Nombre = ?, Apellido = ?, Fch_Nacimiento = ?, Email = ? WHERE LogId = ?";
+            String consulta = "UPDATE Funcionario SET Ci = ?, Nombre = ?, Apellido = ?, Fch_Nacimiento = ? WHERE LogId = ?";
             PreparedStatement ps = connection.prepareStatement(consulta);
 
             ps.setInt(1, Integer.parseInt(cedula.getText()));

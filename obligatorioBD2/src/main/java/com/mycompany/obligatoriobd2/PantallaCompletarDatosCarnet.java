@@ -218,6 +218,7 @@ public class PantallaCompletarDatosCarnet extends javax.swing.JFrame {
                             case 4 -> JOptionPane.showMessageDialog(null, "¡ERROR! Su carnet no puede estár vencido");
                             case 5 -> JOptionPane.showMessageDialog(null, "¡ERROR! La fecha final no puede ser anterior a la inicial");
                             default -> {
+                                    funcionario.actualizarDatos(jTextFieldCedula, jTextFieldNombre, jTextFieldApellido, jDateNacimiento);
                                     carnet.insertarCarnet(jTextFieldCedula, jDateEmision, jDateVencimiento, getUbicacionArchivo());
                                     dispose();
                                     }
