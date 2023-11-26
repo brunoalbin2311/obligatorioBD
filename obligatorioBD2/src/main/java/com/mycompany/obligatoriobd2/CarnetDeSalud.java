@@ -8,6 +8,7 @@ import com.toedter.calendar.JDateChooser;
 import java.awt.HeadlessException;
 import java.sql.CallableStatement;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.Date;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
@@ -82,5 +83,34 @@ public class CarnetDeSalud {
         } catch (HeadlessException | SQLException e ){
             JOptionPane.showMessageDialog(null, "Su registro no se hizo correctamente, error: "+e.toString());
         }
+    }
+    
+    public int verificarCarnet(JDateChooser fechaEmision, JDateChooser fechaVencimiento, String comprobante) {
+        
+        Date fechaInicial = fechaEmision.getDate();
+        Date fechaFinal = fechaVencimiento.getDate();
+        LocalDate fechaHoy = LocalDate.now();
+        Date fechaHoyDate = java.sql.Date.valueOf(fechaHoy); 
+        
+        if (comprobante == null) {
+            return 1;
+        }
+        
+        if (fechaInicial == null ){
+            return 2;
+        }
+        
+        if (fechaFinal == null ){
+            return 3;
+        }
+        
+        if (fechaInicial.before(fechaHoyDate) || fechaFinal.before(fechaHoyDate)) {
+            return 4;
+        }
+        
+        if (fechaInicial.after(fechaFinal)) {
+            return 5;
+        }
+        return 6;
     }
 }

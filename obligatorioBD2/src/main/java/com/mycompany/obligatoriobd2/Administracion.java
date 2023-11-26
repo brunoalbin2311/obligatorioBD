@@ -142,18 +142,22 @@ public class Administracion {
         Date fechaHoyDate = java.sql.Date.valueOf(fechaHoy); 
 
 
-        if (fechaInicial == null || fechaFinal == null) {
+        if (fechaInicial == null) {
             return 1;
         }
         
-        if (fechaInicial.before(fechaHoyDate) || fechaFinal.before(fechaHoyDate)) {
+        if (fechaFinal == null){ 
             return 2;
+        }
+        
+        if (fechaInicial.before(fechaHoyDate) || fechaFinal.before(fechaHoyDate)) {
+            return 3;
         }
 
         if (fechaInicial.after(fechaFinal)) {
-            return 3;
+            return 4;
         }
         
-        return 4;
+        return 5;
     }
 }

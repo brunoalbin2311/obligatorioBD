@@ -98,18 +98,16 @@ public class PantallaAdmin extends javax.swing.JFrame {
 
     private void botonActualizarAdminActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonActualizarAdminActionPerformed
         Administracion admin = new Administracion();
-    
-        int resultadoVerificacion = admin.verificarFechas(jDateChooserInicio, jDateChooserFin);
 
-        if (resultadoVerificacion == 1) {
-            JOptionPane.showMessageDialog(null, "¡ERROR! Ingrese algun campo tiene una fecha no válida");
-        } else if (resultadoVerificacion == 2) {
-            JOptionPane.showMessageDialog(null, "¡ERROR! Ingreso alguna fecha que ya pasó, porfavor ingrese una fecha válida");
-        } else if (resultadoVerificacion == 3) {
-            JOptionPane.showMessageDialog(null, "¡ERROR! Ingrese las fechas en el orden correcto");
-        } else {
-            admin.actualizarPeriodo(jDateChooserInicio, jDateChooserFin);
-            dispose();
+        switch (admin.verificarFechas(jDateChooserInicio, jDateChooserFin)) {
+            case 1 -> JOptionPane.showMessageDialog(null, "¡ERROR! Ingrese un valor válido en el campo: 'Fecha inicio'");
+            case 2 -> JOptionPane.showMessageDialog(null, "¡ERROR! Ingrese un valor válido en el campo: 'Fecha Fin'");
+            case 3 -> JOptionPane.showMessageDialog(null, "¡ERROR! Ingresó alguna fecha que ya pasó, por favor ingrese una fecha válida");
+            case 4 -> JOptionPane.showMessageDialog(null, "¡ERROR! Ingrese las fechas en el orden correcto");
+            default -> {
+                    admin.actualizarPeriodo(jDateChooserInicio, jDateChooserFin);
+                    dispose();
+            }
         }
     }//GEN-LAST:event_botonActualizarAdminActionPerformed
 

@@ -6,6 +6,7 @@ package com.mycompany.obligatoriobd2;
 
 import com.toedter.calendar.JDateChooser;
 import java.awt.HeadlessException;
+import java.awt.List;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import javax.swing.JOptionPane;
@@ -16,6 +17,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
+import java.time.Period;
+import java.util.ArrayList;
 import java.util.Date;
 
 /**
@@ -109,7 +113,6 @@ public class Funcionario {
     public void insertarFuncionario(JTextField cuenta, JPasswordField contra, JTextField cedula, JTextField nombre, JTextField apellido, JDateChooser fechaNacimiento, JTextField direccion, JTextField correo, JTextField telefono){
         
         setCuenta(cuenta.getText());
-        
         char[] arrayContra = contra.getPassword();
         String contraStr = new String(arrayContra); 
         String contraHasheada = obtenerMD5(contraStr);
@@ -201,6 +204,7 @@ public class Funcionario {
         return datosCorrectos;
     }
     
+    
     public boolean verificarUsuario(JTextField cuenta, JPasswordField contra) {
         
         setCuenta(cuenta.getText());
@@ -238,6 +242,111 @@ public class Funcionario {
         }
         return usuarioEncontrado;
     }
+    
+    public int verificarNuevoFuncionario(JTextField cuenta, JPasswordField contra, JTextField cedula, JTextField nombre, JTextField apellido, JDateChooser fechaNacimiento, JTextField direccion, JTextField correo, JTextField telefono) {
+        
+        setCuenta(cuenta.getText());
+        char[] arrayContra = contra.getPassword();
+        String contraStr = new String(arrayContra); 
+        String ci = cedula.getText();
+        setNombre(nombre.getText());
+        setApellido(apellido.getText());
+        setDireccion(direccion.getText());
+        setCorreo(correo.getText());
+        setTelefono(telefono.getText());
+        
+        LocalDate fechaHoy = LocalDate.now();
+        Date fechaHoyDate = java.sql.Date.valueOf(fechaHoy); 
+        
+        //Validaciones cuenta
+        if (getCuenta().isEmpty()) {
+            return 1;
+        }
+        if ((getCuenta().length()<8) || (getCuenta().length()>20)){
+            return 11;
+        }
+        if (!validarCaracteres(getCuenta())){
+            return 111;
+        }
+        
+        //Validaciones contra
+        if (contraStr.isEmpty()){
+            return 2;
+        }
+        if ((contraStr.length()<8)){
+            return 22;
+        }
+        if ((contraStr.length()>20)){
+            return 222;
+        }
+        if (!validarCaracteres(contraStr)){
+            return 2222;
+        }
+        
+        //Validaciones cedula
+        if (ci == null) {
+            return 3;
+        } 
+        if (ci.length()!=8 || !validarNumeros(ci)){
+            return 33;
+        }
+        
+        //Validaciones nombre
+        if (getNombre().isEmpty()){
+            return 4;
+        }
+        if (!validarLetras(getNombre())){
+            return 44;
+        }
+       
+        //Validaciones apellido
+        if (getApellido().isEmpty()){
+            return 5;
+        }
+        if (!validarLetras(getApellido())){
+            return 55;
+        }
+        
+        //Valdiacion fechaNacimiento
+        if (fechaNacimiento.getDate() != null) {
+            Date fechaSeleccionada = new Date(fechaNacimiento.getDate().getTime());
+            setFechaNacimiento(fechaSeleccionada);
+        } else {
+            return 6;
+        }
+        
+        
+        if (!validarEdad(FechaNacimiento)) {
+            return 66;
+        }
+        
+        //Validación direccion
+        if (getDireccion().isEmpty()){
+            return 7;
+        }
+        if (!validarCaracteres(getDireccion())){
+            return 77;
+        }
+        
+        //Validacion correo
+        if (getCorreo().isEmpty()){
+            return 8;
+        }
+        if (!validarCorreo(getCorreo())){
+            return 88;
+        }
+        
+        //Validar telefono
+        if (getTelefono().isEmpty()){
+            return 9;
+        }
+        if (getTelefono().length()!=9 || !validarTelefono(getTelefono())){
+            return 99;
+        }
+ 
+        return 10;
+    }
+    
     
     public String obtenerMD5(String contra) {
         try {
@@ -280,5 +389,78 @@ public class Funcionario {
             e.printStackTrace();
         }
         return esAdmin;
+    }
+    
+    public boolean validarCedula(int cedula) {
+        
+        String numeroString = Integer.toString(cedula);
+
+        if (numeroString.length() == 8) {
+            for (char i : numeroString.toCharArray()) {
+                if (!Character.isDigit(i)) {
+                    return false; 
+                }
+            }
+            return true;
+        }
+        return false;
+    }
+    
+    public static boolean validarCaracteres(String cuenta) {
+     
+        String caracteresPermitidos = "qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM0123456789";
+        for (char c : cuenta.toCharArray()) {
+            if (caracteresPermitidos.indexOf(c) == -1) {
+                return false;
+            }
+        }
+        return true;
+    }
+    
+    public static boolean validarLargo(String cuenta) {
+        if (cuenta.length()<8) {
+            return false;
+        } else if ((cuenta.length()>20)) {
+            return false;
+        }
+        return true;
+    }
+    
+    public static boolean validarNumeros(String input) {
+        String caracteresPermitidos = "0123456789";
+        for (char c : input.toCharArray()) {
+            if (caracteresPermitidos.indexOf(c) == -1) {
+                return false;
+            }
+        }
+        return true;
+    }
+    
+    public static boolean validarLetras(String input) {
+        String caracteresPermitidos = "qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM";
+        for (char c : input.toCharArray()) {
+            if (caracteresPermitidos.indexOf(c) == -1) {
+                return false;
+            }
+        }
+        return true;
+    }
+    
+    public static boolean validarEdad(Date fechaNacimiento) {
+       
+        LocalDate nacimiento = fechaNacimiento.toInstant().atZone(java.time.ZoneId.systemDefault()).toLocalDate();
+        
+        LocalDate fechaHoy = LocalDate.now(); 
+
+        int edad = Period.between(nacimiento, fechaHoy).getYears();
+        return edad >= 18;
+    }
+    
+    public static boolean validarCorreo(String correo) {
+        return correo.endsWith("@gmail.com") || correo.endsWith("@correo.ucu.edu.uy");
+    }
+    
+    public static boolean validarTelefono(String telefono) {
+        return telefono.startsWith("09");
     }
 }

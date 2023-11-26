@@ -7,6 +7,7 @@ package com.mycompany.obligatoriobd2;
 import java.awt.Color;
 import java.io.File;
 import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -287,9 +288,35 @@ public class PantallaRegistrarDatosCarnet extends javax.swing.JFrame {
     private void botonCompletarDatosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonCompletarDatosActionPerformed
         Funcionario funcionario = new Funcionario();
         CarnetDeSalud carnet = new CarnetDeSalud();
-        funcionario.insertarFuncionario(jTextFieldCuenta, jPasswordField1, jTextFieldCedula, jTextFieldNombre, jTextFieldApellido, jDateNacimiento, jTextFieldDireccion, jTextFieldCorreo, jTextFieldTelefono1);
-        carnet.insertarCarnet(jTextFieldCedula, jDateEmision, jDateVencimiento, getUbicacionArchivo());
-        dispose();
+        
+        switch (funcionario.verificarNuevoFuncionario(jTextFieldCuenta, jPasswordField1, jTextFieldCedula, jTextFieldNombre, jTextFieldApellido, jDateNacimiento, jTextFieldDireccion, jTextFieldCorreo, jTextFieldTelefono1)) {
+            case 1 -> JOptionPane.showMessageDialog(null, "¡ERROR! El campo 'CUENTA' se encuentra vacío.");
+            case 11 -> JOptionPane.showMessageDialog(null, "¡ERROR! El campo 'CUENTA' no puede tener ménos de 8 caracteres ni mas de 20.");
+            case 111 -> JOptionPane.showMessageDialog(null, "¡ERROR! El campo 'CUENTA' tiene caracteres no permitidos, ingrese solo letras y números.");
+            case 2 -> JOptionPane.showMessageDialog(null, "¡ERROR! El campo 'CONTRASEÑA' se encuentra vacío.");
+            case 22 -> JOptionPane.showMessageDialog(null, "¡ERROR! El campo 'CONTRASEÑA' no puede tener ménos de 8 caracteres.");
+            case 222 -> JOptionPane.showMessageDialog(null, "¡ERROR! El campo 'CONTRASEÑA' no puede tener más de 20 caracteres.");
+            case 2222 -> JOptionPane.showMessageDialog(null, "¡ERROR! El campo 'CONTRASEÑA' tiene caracteres no permitidos, ingrese solo letras y números.");
+            case 3 -> JOptionPane.showMessageDialog(null, "¡ERROR! El campo 'CEDULA' se encuentra vacío.");
+            case 33 -> JOptionPane.showMessageDialog(null, "¡ERROR! El campo 'CEDULA' no tiene una cédula valida.");
+            case 4 -> JOptionPane.showMessageDialog(null, "¡ERROR! El campo 'NOMBRE' se encuentra vacío.");
+            case 44 -> JOptionPane.showMessageDialog(null, "¡ERROR! El campo 'NOMBRE' tiene caracteres no permitidos, ingrese solo letras o sos chino hdp.");
+            case 5 -> JOptionPane.showMessageDialog(null, "¡ERROR! El campo 'APELLIDO' se encuentra vacío.");
+            case 55 -> JOptionPane.showMessageDialog(null, "¡ERROR! El campo 'APELLIDO' tiene caracteres no permitidos, ingrese solo letras.");
+            case 6 -> JOptionPane.showMessageDialog(null, "¡ERROR! El campo 'FECHA DE NACIMIENTO' se encuentra vacío.");
+            case 66 -> JOptionPane.showMessageDialog(null, "¡ERROR! El campo 'FECHA DE NACIMIENTO' tiene una fecha no válida.");
+            case 7 -> JOptionPane.showMessageDialog(null, "¡ERROR! El campo 'DIRECCIÓN' se encuentra vacío.");
+            case 77 -> JOptionPane.showMessageDialog(null, "¡ERROR! El campo 'DIRECCIÓN' tiene caracteres no permitidos, ingrese solo letras.");
+            case 8 -> JOptionPane.showMessageDialog(null, "¡ERROR! El campo 'CORREO' se encuentra vacío.");
+            case 88 -> JOptionPane.showMessageDialog(null, "¡ERROR! El campo 'CORREO' no ingreso un correo válido.");
+            case 9 -> JOptionPane.showMessageDialog(null, "¡ERROR! El campo 'TELÉFONO' se encuentra vacío.");
+            case 99 -> JOptionPane.showMessageDialog(null, "¡ERROR! El campo 'TELÉFONO' no tiene un número válido.");
+            default -> {
+                    funcionario.insertarFuncionario(jTextFieldCuenta, jPasswordField1, jTextFieldCedula, jTextFieldNombre, jTextFieldApellido, jDateNacimiento, jTextFieldDireccion, jTextFieldCorreo, jTextFieldTelefono1);
+                    carnet.insertarCarnet(jTextFieldCedula, jDateEmision, jDateVencimiento, getUbicacionArchivo());
+                 
+            }
+        }     
     }//GEN-LAST:event_botonCompletarDatosActionPerformed
 
     private void jTextFieldTelefono1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldTelefono1ActionPerformed
