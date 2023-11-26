@@ -11,6 +11,7 @@ import com.toedter.calendar.JDateChooser;
     import java.sql.SQLException;
     import java.text.ParseException;
     import java.text.SimpleDateFormat;
+import java.time.LocalDate;
     import java.util.Calendar;
     import java.util.Date;
     import javax.swing.JOptionPane;
@@ -63,5 +64,25 @@ import com.toedter.calendar.JDateChooser;
         } catch (HeadlessException | SQLException e ){
             JOptionPane.showMessageDialog(null, "Su registro no se hizo correctamente, error: "+e.toString());
         }
+    }
+    
+    public int verificarFechaAgenda(JDateChooser fecha){
+ 
+        Date fechaVerificar = fecha.getDate();
+        
+        LocalDate fechaHoy = LocalDate.now();
+        Date fechaHoyDate = java.sql.Date.valueOf(fechaHoy);      
+        
+        if (fecha.getDate() != null) {
+            Date fechaSel = new Date(fecha.getDate().getTime());
+            fechaVerificar = fechaSel;
+        } else {
+            return 1;
+        }
+        
+        if (fechaVerificar.before(fechaHoyDate)) {
+            return 2;
+        }
+        return 3;
     }
 }

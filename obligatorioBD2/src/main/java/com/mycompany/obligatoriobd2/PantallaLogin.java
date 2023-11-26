@@ -104,6 +104,8 @@ public class PantallaLogin extends javax.swing.JFrame {
 
         if (funcionario.verificarUsuario(jTextFieldCuenta, jPasswordContra)) {
             if (!funcionario.esAdmin()) {
+                
+                funcionario.nuevoLogin(jTextFieldCuenta);
                 PantallaPreguntaCarnetComp pantalla = new PantallaPreguntaCarnetComp();
                 pantalla.setLocationRelativeTo(null);
                 pantalla.setVisible(true);

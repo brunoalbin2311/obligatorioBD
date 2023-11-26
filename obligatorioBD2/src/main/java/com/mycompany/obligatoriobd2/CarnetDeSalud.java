@@ -104,11 +104,11 @@ public class CarnetDeSalud {
             return 3;
         }
         
-        if (fechaInicial.before(fechaHoyDate) || fechaFinal.before(fechaHoyDate)) {
+        if (fechaFinal.before(fechaHoyDate)) {
             return 4;
         }
         
-        if (fechaInicial.after(fechaFinal)) {
+        if (fechaFinal.before(fechaInicial)) {
             return 5;
         }
         return 6;

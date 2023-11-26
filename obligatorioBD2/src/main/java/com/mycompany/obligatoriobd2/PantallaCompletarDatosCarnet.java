@@ -198,17 +198,32 @@ public class PantallaCompletarDatosCarnet extends javax.swing.JFrame {
 
     private void botonCompletarDatosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonCompletarDatosActionPerformed
         Funcionario funcionario = new Funcionario();
-
-        try {
-            if (funcionario.actualizarDatos(jTextFieldCedula, jTextFieldNombre, jTextFieldApellido, jDateNacimiento)) {
-                CarnetDeSalud carnet = new CarnetDeSalud();
-                carnet.insertarCarnet(jTextFieldCedula, jDateEmision, jDateVencimiento, getUbicacionArchivo());
-                dispose();
-            } else {
-                JOptionPane.showMessageDialog(this, "Datos ingresados incorrectamente");
+        CarnetDeSalud carnet = new CarnetDeSalud();
+                    
+        switch (funcionario.verificarFuncionario(jTextFieldCedula, jTextFieldNombre, jTextFieldApellido, jDateNacimiento)) {
+           
+            case 3 -> JOptionPane.showMessageDialog(null, "¡ERROR! El campo 'CEDULA' se encuentra vacío.");
+            case 33 -> JOptionPane.showMessageDialog(null, "¡ERROR! El campo 'CEDULA' no tiene una cédula valida.");
+            case 4 -> JOptionPane.showMessageDialog(null, "¡ERROR! El campo 'NOMBRE' se encuentra vacío.");
+            case 44 -> JOptionPane.showMessageDialog(null, "¡ERROR! El campo 'NOMBRE' tiene caracteres no permitidos, ingrese solo letras o sos chino hdp.");
+            case 5 -> JOptionPane.showMessageDialog(null, "¡ERROR! El campo 'APELLIDO' se encuentra vacío.");
+            case 55 -> JOptionPane.showMessageDialog(null, "¡ERROR! El campo 'APELLIDO' tiene caracteres no permitidos, ingrese solo letras.");
+            case 6 -> JOptionPane.showMessageDialog(null, "¡ERROR! El campo 'FECHA DE NACIMIENTO' se encuentra vacío.");
+            case 66 -> JOptionPane.showMessageDialog(null, "¡ERROR! El campo 'FECHA DE NACIMIENTO' tiene una fecha no válida.");
+            default -> {
+                    switch (carnet.verificarCarnet(jDateEmision, jDateVencimiento, getUbicacionArchivo())){
+                            case 1 -> JOptionPane.showMessageDialog(null, "¡ERROR! No ingreso un comprobante aún");
+                            case 2 -> JOptionPane.showMessageDialog(null, "¡ERROR! El campo 'Fecha Emision' tiene una fecha no valida");
+                            case 3 -> JOptionPane.showMessageDialog(null, "¡ERROR! El campo 'Fecha Vencimiento' tiene una fecha no valida");
+                            case 4 -> JOptionPane.showMessageDialog(null, "¡ERROR! Su carnet no puede estár vencido");
+                            case 5 -> JOptionPane.showMessageDialog(null, "¡ERROR! La fecha final no puede ser anterior a la inicial");
+                            default -> {
+                                    carnet.insertarCarnet(jTextFieldCedula, jDateEmision, jDateVencimiento, getUbicacionArchivo());
+                                    dispose();
+                                    }
+                        }
+        
             }
-        } catch (SQLException ex) {
-            Logger.getLogger(PantallaCompletarDatosCarnet.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_botonCompletarDatosActionPerformed
 

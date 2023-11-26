@@ -110,6 +110,26 @@ public class Funcionario {
         this.Telefono = Telefono;
     }
     
+    public void nuevoLogin(JTextField cuenta){
+        setCuenta(cuenta.getText());
+        
+        CConection coneccion = new CConection();
+        
+        String consulta = "INSERT INTO Ultimo_Inicio (LogId) VALUES (?);";
+        
+        try {
+            
+            CallableStatement cs = coneccion.establecerConexion().prepareCall(consulta);
+            
+            cs.setString(1, getCuenta());
+            
+            cs.execute();
+
+        } catch (HeadlessException | SQLException e ){
+            JOptionPane.showMessageDialog(null, "ERROR AL INGRESAR EL LOGIN A LA BASE, ERROR: "+e.toString());
+        }
+    }
+    
     public void insertarFuncionario(JTextField cuenta, JPasswordField contra, JTextField cedula, JTextField nombre, JTextField apellido, JDateChooser fechaNacimiento, JTextField direccion, JTextField correo, JTextField telefono){
         
         setCuenta(cuenta.getText());
@@ -167,33 +187,51 @@ public class Funcionario {
             JOptionPane.showMessageDialog(null, "Su registro no se hizo correctamente, error: "+e.toString());
         }
     }
- 
-    public boolean actualizarDatos(JTextField cedula, JTextField nombre, JTextField apellido, JDateChooser fechaNacimiento) throws SQLException{
-        
-        setCedula(Integer.valueOf(cedula.getText()));
-        setNombre(nombre.getText());
-        setApellido(apellido.getText());
-        Date fechaSeleccionada = new Date(fechaNacimiento.getDate().getTime());
-        setFechaNacimiento(fechaSeleccionada);
-        
+    
+    private boolean actualizarDatos(JTextField cedula, JTextField nombre, JTextField apellido, JDateChooser fechaNacimiento) {
         boolean datosCorrectos = false;
-        
-        String consulta = "UPDATE Funcionario SET Nombre = ?, Apellido = ?, Fch_Nacimiento = ? WHERE Ci = ?";
-        
+        String LogId = obtenerUltimoLogId();
         try {
-            
+            CConection coneccion = new CConection();
+            Connection connection = coneccion.establecerConexion();
+
+            String consulta = "UPDATE Funcionario SET Ci = ?, Nombre = ?, Apellido = ?, Fch_Nacimiento = ?, Email = ? WHERE LogId = ?";
+            PreparedStatement ps = connection.prepareStatement(consulta);
+
+            ps.setInt(1, Integer.parseInt(cedula.getText()));
+            ps.setString(2, nombre.getText());
+            ps.setString(3, apellido.getText());
+            ps.setDate(4, new java.sql.Date(fechaNacimiento.getDate().getTime()));
+            ps.setString(5, LogId);
+
+            int rowsAffected = ps.executeUpdate();
+
+            datosCorrectos = rowsAffected > 0;
+
+            ps.close();
+            connection.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return datosCorrectos;
+    }
+    
+    public String obtenerUltimoLogId() {
+        String ultimoLogId = null;
+
+        try {
+            String consulta = "SELECT LogId FROM Ultimo_Inicio ORDER BY Nro DESC LIMIT 1";
+
             CConection conexion = new CConection();
             Connection connection = conexion.establecerConexion();
 
             PreparedStatement ps = connection.prepareStatement(consulta);
-            ps.setInt(1, getCedula());
-            ps.setString(2, getNombre());
-            ps.setString(3, getApellido());
-            ps.setDate(4, new java.sql.Date(getFechaNacimiento().getTime()));
-
             ResultSet rs = ps.executeQuery();
 
-            datosCorrectos = rs.next();
+            if (rs.next()) {
+                ultimoLogId = rs.getString("LogId");
+            }
 
             rs.close();
             ps.close();
@@ -201,10 +239,10 @@ public class Funcionario {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return datosCorrectos;
+
+        return ultimoLogId;
     }
-    
-    
+ 
     public boolean verificarUsuario(JTextField cuenta, JPasswordField contra) {
         
         setCuenta(cuenta.getText());
@@ -347,6 +385,51 @@ public class Funcionario {
         return 10;
     }
     
+    public int verificarFuncionario(JTextField cedula, JTextField nombre, JTextField apellido, JDateChooser fechaNacimiento) {
+        
+        String ci = cedula.getText();
+        setNombre(nombre.getText());
+        setApellido(apellido.getText());
+        
+        //Validaciones cedula
+        if (ci == null) {
+            return 3;
+        } 
+        if (ci.length()!=8 || !validarNumeros(ci)){
+            return 33;
+        }
+        
+        //Validaciones nombre
+        if (getNombre().isEmpty()){
+            return 4;
+        }
+        if (!validarLetras(getNombre())){
+            return 44;
+        }
+       
+        //Validaciones apellido
+        if (getApellido().isEmpty()){
+            return 5;
+        }
+        if (!validarLetras(getApellido())){
+            return 55;
+        }
+        
+        //Valdiacion fechaNacimiento
+        if (fechaNacimiento.getDate() != null) {
+            Date fechaSeleccionada = new Date(fechaNacimiento.getDate().getTime());
+            setFechaNacimiento(fechaSeleccionada);
+        } else {
+            return 6;
+        }
+        
+        if (!validarEdad(FechaNacimiento)) {
+            return 66;
+        }
+
+        return 10;
+    }
+
     
     public String obtenerMD5(String contra) {
         try {
@@ -408,7 +491,7 @@ public class Funcionario {
     
     public static boolean validarCaracteres(String cuenta) {
      
-        String caracteresPermitidos = "qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM0123456789";
+        String caracteresPermitidos = "qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM0123456789 ";
         for (char c : cuenta.toCharArray()) {
             if (caracteresPermitidos.indexOf(c) == -1) {
                 return false;

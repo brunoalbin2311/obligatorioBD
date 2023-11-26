@@ -4,6 +4,7 @@
  */
 package com.mycompany.obligatoriobd2;
 
+import com.toedter.calendar.JDateChooser;
 import java.awt.Color;
 import java.io.File;
 import javax.swing.JFileChooser;
@@ -288,7 +289,7 @@ public class PantallaRegistrarDatosCarnet extends javax.swing.JFrame {
     private void botonCompletarDatosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonCompletarDatosActionPerformed
         Funcionario funcionario = new Funcionario();
         CarnetDeSalud carnet = new CarnetDeSalud();
-        
+                    
         switch (funcionario.verificarNuevoFuncionario(jTextFieldCuenta, jPasswordField1, jTextFieldCedula, jTextFieldNombre, jTextFieldApellido, jDateNacimiento, jTextFieldDireccion, jTextFieldCorreo, jTextFieldTelefono1)) {
             case 1 -> JOptionPane.showMessageDialog(null, "¡ERROR! El campo 'CUENTA' se encuentra vacío.");
             case 11 -> JOptionPane.showMessageDialog(null, "¡ERROR! El campo 'CUENTA' no puede tener ménos de 8 caracteres ni mas de 20.");
@@ -312,9 +313,19 @@ public class PantallaRegistrarDatosCarnet extends javax.swing.JFrame {
             case 9 -> JOptionPane.showMessageDialog(null, "¡ERROR! El campo 'TELÉFONO' se encuentra vacío.");
             case 99 -> JOptionPane.showMessageDialog(null, "¡ERROR! El campo 'TELÉFONO' no tiene un número válido.");
             default -> {
-                    funcionario.insertarFuncionario(jTextFieldCuenta, jPasswordField1, jTextFieldCedula, jTextFieldNombre, jTextFieldApellido, jDateNacimiento, jTextFieldDireccion, jTextFieldCorreo, jTextFieldTelefono1);
-                    carnet.insertarCarnet(jTextFieldCedula, jDateEmision, jDateVencimiento, getUbicacionArchivo());
-                 
+                    switch (carnet.verificarCarnet(jDateEmision, jDateVencimiento, getUbicacionArchivo())){
+                            case 1 -> JOptionPane.showMessageDialog(null, "¡ERROR! No ingreso un comprobante aún");
+                            case 2 -> JOptionPane.showMessageDialog(null, "¡ERROR! El campo 'Fecha Emision' tiene una fecha no valida");
+                            case 3 -> JOptionPane.showMessageDialog(null, "¡ERROR! El campo 'Fecha Vencimiento' tiene una fecha no valida");
+                            case 4 -> JOptionPane.showMessageDialog(null, "¡ERROR! Su carnet no puede estár vencido");
+                            case 5 -> JOptionPane.showMessageDialog(null, "¡ERROR! La fecha final no puede ser anterior a la inicial");
+                            default -> {
+                                    funcionario.insertarFuncionario(jTextFieldCuenta, jPasswordField1, jTextFieldCedula, jTextFieldNombre, jTextFieldApellido, jDateNacimiento, jTextFieldDireccion, jTextFieldCorreo, jTextFieldTelefono1);
+                                    carnet.insertarCarnet(jTextFieldCedula, jDateEmision, jDateVencimiento, getUbicacionArchivo());
+                                    dispose();
+                                    }
+                        }
+        
             }
         }     
     }//GEN-LAST:event_botonCompletarDatosActionPerformed
