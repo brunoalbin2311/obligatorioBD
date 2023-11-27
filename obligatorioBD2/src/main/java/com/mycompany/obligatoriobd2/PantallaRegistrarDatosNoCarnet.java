@@ -251,12 +251,14 @@ public class PantallaRegistrarDatosNoCarnet extends javax.swing.JFrame {
             case 1 -> JOptionPane.showMessageDialog(null, "¡ERROR! El campo 'CUENTA' se encuentra vacío.");
             case 11 -> JOptionPane.showMessageDialog(null, "¡ERROR! El campo 'CUENTA' no puede tener ménos de 8 caracteres ni mas de 20.");
             case 111 -> JOptionPane.showMessageDialog(null, "¡ERROR! El campo 'CUENTA' tiene caracteres no permitidos, ingrese solo letras y números.");
+            case 1111 -> JOptionPane.showMessageDialog(null, "¡ERROR! El campo 'CUENTA' tiene un usuario no disponible, porfavor ingrese otro.");
             case 2 -> JOptionPane.showMessageDialog(null, "¡ERROR! El campo 'CONTRASEÑA' se encuentra vacío.");
             case 22 -> JOptionPane.showMessageDialog(null, "¡ERROR! El campo 'CONTRASEÑA' no puede tener ménos de 8 caracteres.");
             case 222 -> JOptionPane.showMessageDialog(null, "¡ERROR! El campo 'CONTRASEÑA' no puede tener más de 20 caracteres.");
             case 2222 -> JOptionPane.showMessageDialog(null, "¡ERROR! El campo 'CONTRASEÑA' tiene caracteres no permitidos, ingrese solo letras y números.");
             case 3 -> JOptionPane.showMessageDialog(null, "¡ERROR! El campo 'CEDULA' se encuentra vacío.");
             case 33 -> JOptionPane.showMessageDialog(null, "¡ERROR! El campo 'CEDULA' no tiene una cédula valida.");
+            case 333 -> JOptionPane.showMessageDialog(null, "¡ERROR! El campo 'CEDULA' tiene un cedula no disponible, porfavor verifique bien su cédula.");
             case 4 -> JOptionPane.showMessageDialog(null, "¡ERROR! El campo 'NOMBRE' se encuentra vacío.");
             case 44 -> JOptionPane.showMessageDialog(null, "¡ERROR! El campo 'NOMBRE' tiene caracteres no permitidos, ingrese solo letras o sos chino hdp.");
             case 5 -> JOptionPane.showMessageDialog(null, "¡ERROR! El campo 'APELLIDO' se encuentra vacío.");
@@ -267,8 +269,10 @@ public class PantallaRegistrarDatosNoCarnet extends javax.swing.JFrame {
             case 77 -> JOptionPane.showMessageDialog(null, "¡ERROR! El campo 'DIRECCIÓN' tiene caracteres no permitidos, ingrese solo letras.");
             case 8 -> JOptionPane.showMessageDialog(null, "¡ERROR! El campo 'CORREO' se encuentra vacío.");
             case 88 -> JOptionPane.showMessageDialog(null, "¡ERROR! El campo 'CORREO' no ingreso un correo válido.");
+            case 888 -> JOptionPane.showMessageDialog(null, "¡ERROR! El campo 'CORREO' tiene un correo no disponible, porfavor verifique bien su correo.");
             case 9 -> JOptionPane.showMessageDialog(null, "¡ERROR! El campo 'TELÉFONO' se encuentra vacío.");
             case 99 -> JOptionPane.showMessageDialog(null, "¡ERROR! El campo 'TELÉFONO' no tiene un número válido.");
+            case 999 -> JOptionPane.showMessageDialog(null, "¡ERROR! El campo 'TELÉFONO' tiene un teléfono no disponible, porfavor verifique bien su teléfono.");
             default -> {
                 switch (agenda.verificarFechaAgenda(jDateAgenda)) {
                     case 1 -> JOptionPane.showMessageDialog(null, "¡ERROR! El campo para seleccionar una fecha de agenda se encuentra vacío.");

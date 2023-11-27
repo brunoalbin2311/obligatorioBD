@@ -306,6 +306,9 @@ public class Funcionario {
         if (!validarCaracteres(getCuenta())){
             return 111;
         }
+        if (cuentaExiste(getCuenta())) {
+            return 1111;
+        }
         
         //Validaciones contra
         if (contraStr.isEmpty()){
@@ -327,6 +330,9 @@ public class Funcionario {
         } 
         if (ci.length()!=8 || !validarNumeros(ci)){
             return 33;
+        }
+        if (cedulaExiste(Integer.parseInt(ci))) {
+            return 333;
         }
         
         //Validaciones nombre
@@ -352,8 +358,6 @@ public class Funcionario {
         } else {
             return 6;
         }
-        
-        
         if (!validarEdad(FechaNacimiento)) {
             return 66;
         }
@@ -373,6 +377,9 @@ public class Funcionario {
         if (!validarCorreo(getCorreo())){
             return 88;
         }
+        if (correoExiste(getCorreo())) {
+            return 888;
+        }
         
         //Validar telefono
         if (getTelefono().isEmpty()){
@@ -380,6 +387,9 @@ public class Funcionario {
         }
         if (getTelefono().length()!=9 || !validarTelefono(getTelefono())){
             return 99;
+        }
+        if (telefonoExiste(getTelefono())) {
+            return 999;
         }
  
         return 10;
@@ -398,6 +408,10 @@ public class Funcionario {
         if (ci.length()!=8 || !validarNumeros(ci)){
             return 33;
         }
+        if (cedulaExiste(Integer.parseInt(ci))) {
+            return 333;
+        }
+        
         
         //Validaciones nombre
         if (getNombre().isEmpty()){
@@ -472,6 +486,94 @@ public class Funcionario {
             e.printStackTrace();
         }
         return esAdmin;
+    }
+    
+    public boolean cuentaExiste(String logId) {
+        String consulta = "SELECT COUNT(*) FROM Funcionario WHERE LogId = ?";
+        CConection conection = new CConection();
+        try (Connection conexion = conection.establecerConexion();
+             PreparedStatement preparedStatement = conexion.prepareStatement(consulta)) {
+
+            preparedStatement.setString(1, logId);
+
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                if (resultSet.next()) {
+                    int cantidad = resultSet.getInt(1);
+                    return cantidad > 0;
+                }
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return false;
+    }
+    
+    public boolean cedulaExiste(int cedula) {
+        String consulta = "SELECT COUNT(*) FROM Funcionario WHERE Ci = ?";
+        CConection conection = new CConection();
+        try (Connection conexion = conection.establecerConexion();
+            PreparedStatement preparedStatement = conexion.prepareStatement(consulta)) {
+
+            preparedStatement.setInt(1, cedula);
+
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                if (resultSet.next()) {
+                    int cantidad = resultSet.getInt(1);
+                    return cantidad > 0;
+                }
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return false;
+    }
+    
+    public boolean correoExiste(String correo) {
+        String consulta = "SELECT COUNT(*) FROM Funcionario WHERE Email = ?";
+        CConection conection = new CConection();
+        try (Connection conexion = conection.establecerConexion();
+             PreparedStatement preparedStatement = conexion.prepareStatement(consulta)) {
+
+            preparedStatement.setString(1, correo);
+
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                if (resultSet.next()) {
+                    int cantidad = resultSet.getInt(1);
+                    return cantidad > 0;
+                }
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return false;
+    }
+    
+    public boolean telefonoExiste(String telefono) {
+        String consulta = "SELECT COUNT(*) FROM Funcionario WHERE Telefono = ?";
+        CConection conection = new CConection();
+        try (Connection conexion = conection.establecerConexion();
+             PreparedStatement preparedStatement = conexion.prepareStatement(consulta)) {
+
+            preparedStatement.setString(1, telefono);
+
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                if (resultSet.next()) {
+                    int cantidad = resultSet.getInt(1);
+                    return cantidad > 0;
+                }
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return false;
     }
     
     public boolean validarCedula(int cedula) {

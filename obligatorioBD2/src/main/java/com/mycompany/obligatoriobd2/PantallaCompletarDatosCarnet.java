@@ -204,6 +204,7 @@ public class PantallaCompletarDatosCarnet extends javax.swing.JFrame {
            
             case 3 -> JOptionPane.showMessageDialog(null, "¡ERROR! El campo 'CEDULA' se encuentra vacío.");
             case 33 -> JOptionPane.showMessageDialog(null, "¡ERROR! El campo 'CEDULA' no tiene una cédula valida.");
+            case 333 -> JOptionPane.showMessageDialog(null, "¡ERROR! El campo 'CEDULA' tiene un cedula no disponible, porfavor verifique bien su cédula.");
             case 4 -> JOptionPane.showMessageDialog(null, "¡ERROR! El campo 'NOMBRE' se encuentra vacío.");
             case 44 -> JOptionPane.showMessageDialog(null, "¡ERROR! El campo 'NOMBRE' tiene caracteres no permitidos, ingrese solo letras o sos chino hdp.");
             case 5 -> JOptionPane.showMessageDialog(null, "¡ERROR! El campo 'APELLIDO' se encuentra vacío.");
