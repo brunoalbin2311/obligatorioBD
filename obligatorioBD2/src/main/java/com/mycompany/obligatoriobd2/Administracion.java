@@ -82,7 +82,7 @@ public class Administracion {
         
         CConection coneccion = new CConection();
         
-        String consulta = "INSERT INTO Periodos_Actualizacion(Año, Semestre, Fch_Inicio, Fch_Fin) VALUES (?,?,?,?);";
+        String consulta = "INSERT INTO Periodos_Actualizacion(Anio, Semestre, Fch_Inicio, Fch_Fin) VALUES (?,?,?,?);";
         
         try {
             

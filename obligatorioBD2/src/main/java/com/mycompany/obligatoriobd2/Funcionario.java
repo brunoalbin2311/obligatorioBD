@@ -150,7 +150,7 @@ public class Funcionario {
         
         String consulta1 = "INSERT INTO Administracion (LogId, Rol) VALUES (?,?);";
         String consulta2 = "INSERT INTO Login(LogId, Contra) VALUES (?,?);";
-        String consulta3 = "INSERT INTO Funcionario(Ci, Nombre, Apellido, Fch_Nacimiento, Dirección, Telefono, Email, LogId) VALUES (?,?,?,?,?,?,?,?);";
+        String consulta3 = "INSERT INTO Funcionario(Ci, Nombre, Apellido, Fch_Nacimiento, Direccion, Telefono, Email, LogId) VALUES (?,?,?,?,?,?,?,?);";
         
         try {
             

@@ -19,7 +19,7 @@ public class CConection {
     
     String usuario = "root";
     String contra = "bernardo";
-    String bd = "obligatorioBD";
+    String bd = "ObligatorioBD";
     String ip = "localhost";
     String puerto = "3306";
     
